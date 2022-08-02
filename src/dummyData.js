@@ -1,4 +1,4 @@
-const data = [
+export const dummyData = [
     {
         "name": "Adidas F50 Adizero",
         "brand": "Adidas",
