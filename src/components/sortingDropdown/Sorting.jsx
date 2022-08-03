@@ -1,4 +1,5 @@
 import React  from "react";
+import './Sorting.css';
 
 const Sorting = () => {
     
@@ -12,7 +13,8 @@ const Sorting = () => {
 
     return (
         <span>
-            <select name="filter" id="cleats">
+            <span>Sort by </span>
+            <select className="sorting-dropdown" name="filter" id="cleats">
                 {options.map((val, key) => {
                     return (
                         <option value={key}>{val}</option>

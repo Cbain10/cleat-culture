@@ -1,7 +1,7 @@
 import './App.css';
-import CleatTable from './components/CleatTable';
-import Sorting from './components/Sorting';
-import Title from './components/Title';
+import CleatTable from './components/cleatTable/CleatTable';
+import Sorting from './components/sortingDropdown/Sorting';
+import Title from './components/title/Title';
 
 function App() {
   return (
