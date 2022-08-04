@@ -9,13 +9,15 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
     const [year, setYear] = useState('');
     const [color, setColor] = useState('');
     const [rating, setRating] = useState('');
+    const [url, setUrl] = useState('');
 
     const disabled = !(
         name !== '' &&
         brand !== '' &&
         year !== '' &&
         color !== '' &&
-        rating !== ''
+        rating !== '' &&
+        url !== ''
     )
 
     const onSubmit = () => {
@@ -28,7 +30,7 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
             "color": color,
             "rating": rating,
             "year": year,
-            "photo": "https://laz-img-sg.alicdn.com/p/e55ba53096902fc6ba68eae2e0db5261.jpg",
+            "photo": url,
             "uid": `${uid}`
         };
         // clear all the data?
@@ -39,6 +41,15 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
         setRating('');
 
         handleSumbit(newCleat);
+    }
+    
+    const onClose = () => {
+        setName('');
+        setBrand('');
+        setYear('');
+        setColor('');
+        setRating('');
+        handleClose();
     }
 
     return (
@@ -84,14 +95,22 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
                             onChange={(e) => setRating(e.target.value)}
                         />
                     </label>
+                    <br/>
+                    <label>Image URL:
+                        <input
+                            type="text" 
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                        />
+                    </label>
                 </form>
-                <button className="thing"
+                <button
                     type="button"
                     disabled={disabled}
                     onClick={onSubmit} >
                         Submit
                 </button>
-                <button className="thing" type="button" onClick={handleClose}>
+                <button className="thing" type="button" onClick={onClose}>
                     Close
                 </button>
             </div>
