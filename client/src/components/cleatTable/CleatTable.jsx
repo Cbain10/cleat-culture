@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { dummyData } from "../../dummyData";
 import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
+import Axios from 'axios';
 
 const CleatTable = () => {
 
@@ -9,6 +10,17 @@ const CleatTable = () => {
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
 
     const onAddCleatSumbit = (cleat) => {
+        Axios.post("http://localhost:3001/api/insert",
+            {
+                cleatName: cleat.name,
+                brand: cleat.brand,
+                releaseYear: cleat.year,
+                rating: cleat.rating,
+                imageURL: cleat.photo,
+            },
+        ).then(() => {
+            alert("successful insert!");
+        });
         setData([...data, cleat]);
         setShowAddCleatModal(false);
     }
