@@ -15,7 +15,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {});
+app.get('/api/get', (req, res) => {
+    const sqlSelect = "SELECT * FROM cleats"
+
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
 
 app.post('/api/insert', (req, res) => {
 
@@ -28,7 +34,7 @@ app.post('/api/insert', (req, res) => {
     const sqlInsert = "INSERT INTO cleats (cleatName, brand, releaseYear, rating, imageURL) VALUE (?,?,?,?,?)"
 
     db.query(sqlInsert, [cleatName, brand, releaseYear, rating, imageURL], (err, result) => {
-        console.log(err);
+        console.log(result);
     });
 })
 

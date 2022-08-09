@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { dummyData } from "../../dummyData";
+// import { dummyData } from "../../dummyData";
 import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import Axios from 'axios';
+import { useEffect } from "react";
 
 const CleatTable = () => {
 
-    const [data, setData] = useState([...dummyData]);
+    const [data, setData] = useState([]);
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
+            setData(response.data);
+        })
+    }, []);
 
     const onAddCleatSumbit = (cleat) => {
         Axios.post("http://localhost:3001/api/insert",
@@ -41,7 +48,7 @@ const CleatTable = () => {
                         <th className="image-col">Image</th>
                         <th>Cleat</th>
                         <th>Year</th>
-                        <th>Color</th>
+                        {/* <th>Color</th> */}
                         <th>Rating</th>
                         <th className="delete-col"></th>
                     </tr>
@@ -49,11 +56,11 @@ const CleatTable = () => {
                         return (
                             <tr key={key}>
                                 <td className="image-col">
-                                    <img alt={cleat.photo} src={cleat.photo} height="70px" width="100px" />
+                                    <img alt={cleat.imageURL} src={cleat.imageURL} height="70px" width="100px" />
                                 </td>
-                                <td className="cleat-name-col">{cleat.name}</td>
-                                <td className="year-col">{cleat.year}</td>
-                                <td className="color-col">{cleat.color}</td>
+                                <td className="cleat-name-col">{cleat.cleatName}</td>
+                                <td className="year-col">{cleat.releaseYear}</td>
+                                {/* <td className="color-col">{cleat.color}</td> */}
                                 <td className="rating-col">{cleat.rating}</td>
                                 <td className="delete-col">
                                     <button className="delete-icon" onClick={() => onDeleteCleatClick(cleat.uid)}>
