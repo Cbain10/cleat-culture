@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { dummyData } from "../../dummyData";
 import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import Axios from 'axios';
@@ -14,7 +13,7 @@ const CleatTable = () => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
             setData(response.data);
         })
-    }, []);
+    }, [data]);
 
     const onAddCleatSumbit = (cleat) => {
         Axios.post("http://localhost:3001/api/insert",
@@ -32,12 +31,13 @@ const CleatTable = () => {
         setShowAddCleatModal(false);
     }
 
-    const onDeleteCleatClick = (id) => {
-        setData(data => 
-            data.filter(cleat => {
-                return cleat.uid !== id;
-            })
-        );
+    const onDeleteCleatClick = (cleatName) => {
+        Axios.delete(`http://localhost:3001/api/delete/${cleatName}`);
+        // setData(data => 
+        //     data.filter(cleat => {
+        //         return cleat.cleatName !== cleatName;
+        //     })
+        // );
     }
 
     return (
@@ -63,7 +63,7 @@ const CleatTable = () => {
                                 {/* <td className="color-col">{cleat.color}</td> */}
                                 <td className="rating-col">{cleat.rating}</td>
                                 <td className="delete-col">
-                                    <button className="delete-icon" onClick={() => onDeleteCleatClick(cleat.uid)}>
+                                    <button className="delete-icon" onClick={() => onDeleteCleatClick(cleat.cleatName)}>
                                         X
                                     </button>
                                 </td>

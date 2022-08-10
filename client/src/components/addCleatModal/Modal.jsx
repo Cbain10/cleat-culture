@@ -7,7 +7,6 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
     const [year, setYear] = useState('');
-    const [color, setColor] = useState('');
     const [rating, setRating] = useState('');
     const [url, setUrl] = useState('');
 
@@ -15,41 +14,33 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
         name !== '' &&
         brand !== '' &&
         year !== '' &&
-        color !== '' &&
         rating !== '' &&
         url !== ''
     )
 
     const onSubmit = () => {
-
-       const uid = Math.random();
-
         const newCleat = {
             "name": name,
             "brand": brand,
-            "color": color,
-            "rating": rating,
             "year": year,
+            "rating": rating,
             "photo": url,
-            "uid": `${uid}`
         };
-        // clear all the data?
-        setName('');
-        setBrand('');
-        setYear('');
-        setColor('');
-        setRating('');
-
+        clearData();
         handleSumbit(newCleat);
     }
     
     const onClose = () => {
+        clearData();
+        handleClose();
+    }
+
+    const clearData = () => {
         setName('');
         setBrand('');
         setYear('');
-        setColor('');
         setRating('');
-        handleClose();
+        setUrl('');
     }
 
     return (
@@ -72,19 +63,11 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
                         />
                     </label>
                     <br/>
-                    <label>Make year:
+                    <label>Release year:
                         <input
                             type="text" 
                             value={year}
                             onChange={(e) => setYear(e.target.value)}
-                        />
-                    </label>
-                    <br/>
-                    <label>Color:
-                        <input
-                            type="text" 
-                            value={color}
-                            onChange={(e) => setColor(e.target.value)}
                         />
                     </label>
                     <br/>

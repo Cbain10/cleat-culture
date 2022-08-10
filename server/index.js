@@ -38,6 +38,17 @@ app.post('/api/insert', (req, res) => {
     });
 })
 
+app.delete('/api/delete/:cleatName', (req, res) => {
+    // delete by id or delete by name?
+    // both unique identifiers...
+    const cleatName = req.params.cleatName;
+    const sqlDelete = "DELETE FROM cleats WHERE cleatName = ?"
+
+    db.query(sqlDelete, cleatName, (err, res) => {
+        console.log(err);
+    })
+})
+
 app.listen(3001, () => {
     console.log('running on port 3001...');
 })
