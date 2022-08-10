@@ -3,11 +3,14 @@ import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import Axios from 'axios';
 import { useEffect } from "react";
+import DeleteModal from "../deleteModal/DeleteModal";
 
 const CleatTable = () => {
 
     const [data, setData] = useState([]);
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
+    const [showDeleteCleatModal, setShowDeleteCleatModal] = useState(false);
+    // let cleatToDelete;
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
@@ -31,7 +34,7 @@ const CleatTable = () => {
         setShowAddCleatModal(false);
     }
 
-    const onDeleteCleatClick = (cleatName) => {
+    const deleteCleat = (cleatName) => {
         // add "are you sure you want to delete?" 
         // also, who should be able to delete the cleat?
         Axios.delete(`http://localhost:3001/api/delete/${cleatName}`);
@@ -41,6 +44,11 @@ const CleatTable = () => {
         //     })
         // );
     }
+
+    // const onDeleteClick = (cleat) => {
+    //     // cleatToDelete = cleat;
+    //     // setShowDeleteCleatModal(true);
+    // }
 
     return (
         <>
@@ -63,7 +71,10 @@ const CleatTable = () => {
                                 <td className="year-col">{cleat.releaseYear}</td>
                                 <td className="rating-col">{cleat.rating}</td>
                                 <td className="delete-col">
-                                    <button className="delete-icon" onClick={() => onDeleteCleatClick(cleat.cleatName)}>
+                                    <button className="delete-icon" onClick={() => {
+                                        // cleatToDelete = cleat;
+                                        setShowDeleteCleatModal(true);
+                                    }}>
                                         X
                                     </button>
                                 </td>
@@ -88,6 +99,13 @@ const CleatTable = () => {
                 handleSumbit={onAddCleatSumbit}
                 show={showAddCleatModal} >
             </Modal>
+            <DeleteModal
+                setShowModal={setShowDeleteCleatModal}
+                handleDelete={deleteCleat}
+                show={showDeleteCleatModal}
+                // cleat={cleatToDelete} 
+                >
+            </DeleteModal>
         </>
     )
 };
