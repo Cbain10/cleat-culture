@@ -32,6 +32,8 @@ const CleatTable = () => {
     }
 
     const onDeleteCleatClick = (cleatName) => {
+        // add "are you sure you want to delete?" 
+        // also, who should be able to delete the cleat?
         Axios.delete(`http://localhost:3001/api/delete/${cleatName}`);
         // setData(data => 
         //     data.filter(cleat => {
@@ -48,19 +50,17 @@ const CleatTable = () => {
                         <th className="image-col">Image</th>
                         <th>Cleat</th>
                         <th>Year</th>
-                        {/* <th>Color</th> */}
                         <th>Rating</th>
                         <th className="delete-col"></th>
                     </tr>
                     {data.map((cleat, key) => {
                         return (
-                            <tr key={key}>
+                            <tr className={`item-row ${key % 2 === 0 ? "dark" : "light"}`} key={key}>
                                 <td className="image-col">
                                     <img alt={cleat.imageURL} src={cleat.imageURL} height="70px" width="100px" />
                                 </td>
                                 <td className="cleat-name-col">{cleat.cleatName}</td>
                                 <td className="year-col">{cleat.releaseYear}</td>
-                                {/* <td className="color-col">{cleat.color}</td> */}
                                 <td className="rating-col">{cleat.rating}</td>
                                 <td className="delete-col">
                                     <button className="delete-icon" onClick={() => onDeleteCleatClick(cleat.cleatName)}>
