@@ -1,6 +1,6 @@
-/* table, tr {
-    border: 1px solid;
-} */
+.cleat-table {
+    display: flex;
+}
 
 table {
     border-spacing: 0;
@@ -21,8 +21,6 @@ tr {
 
 .header-row {
     height: 70px;
-    /* background-color: antiquewhite; */
-    /* border-radius: 10px; */
 }
 
 .image-col {
@@ -68,11 +66,6 @@ tr {
     height: 40px;
 }
 
-.item-row {
-
-}
-
 .dark {
     background-color: #F5F8FF;
-    /* background-color: #F7F8FB; */
 }

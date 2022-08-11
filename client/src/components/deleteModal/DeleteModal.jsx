@@ -1,29 +1,30 @@
 import React from "react";
 import './DeleteModal.css';
 
-const DeleteModal = ({ cleat, handleDelete, setShowModal, show }) => {
-
-    const showDeletCleatModal = show ? 'modal display-block' : 'modal display-none';
+const DeleteModal = ({ cleat, handleDelete, setCleatToDelete }) => {
 
     const onDelete = () => {
-        // handleDelete(cleat.cleatName);
+        handleDelete(cleat.cleatName);
     }
 
     const onCancel = () => {
-        setShowModal(false);
+        setCleatToDelete(null);
     }
 
     return (
 
-        <div className={showDeletCleatModal} >
+        <div className="modal">
             <div className="mod" >
-                <p>Are you sure you want to delete?</p>
-                <button
+                <p className="top-text">Are you sure you want to delete</p>
+                <p className="cleat-name-text">{cleat.cleatName}?</p>
+                <img alt={cleat.imageURL} src={cleat.imageURL} height="140px" width="200px" />
+                <br/>
+                <button className="delete-btn btn"
                     type="button"
                     onClick={onDelete} >
                         Delete
                 </button>
-                <button className="thing" type="button" onClick={onCancel}>
+                <button className="btn" type="button" onClick={onCancel}>
                     Cancel
                 </button>
             </div>

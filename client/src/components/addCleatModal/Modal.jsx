@@ -3,7 +3,6 @@ import './Modal.css';
 
 const Modal = ({ handleClose, handleSumbit, show }) => {
 
-    const showAddCleatModal = show ? 'modal display-block' : 'modal display-none';
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
     const [year, setYear] = useState('');
@@ -44,7 +43,7 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
     }
 
     return (
-        <div className={showAddCleatModal} >
+        <div className="modal">
             <div className="form-perimeter">
                 <form>
                     <label>Cleat name:
@@ -65,7 +64,7 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
                     <br/>
                     <label>Release year:
                         <input
-                            type="text" 
+                            type="number" 
                             value={year}
                             onChange={(e) => setYear(e.target.value)}
                         />
@@ -73,7 +72,7 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
                     <br/>
                     <label>Overall Rating:
                         <input
-                            type="text" 
+                            type="number" 
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
                         />
@@ -88,12 +87,13 @@ const Modal = ({ handleClose, handleSumbit, show }) => {
                     </label>
                 </form>
                 <button
+                    className="delete-btn btn"
                     type="button"
                     disabled={disabled}
                     onClick={onSubmit} >
                         Submit
                 </button>
-                <button className="thing" type="button" onClick={onClose}>
+                <button className="btn" type="button" onClick={onClose}>
                     Close
                 </button>
             </div>

@@ -4,16 +4,19 @@ import './CleatTable.css';
 import Axios from 'axios';
 import { useEffect } from "react";
 import DeleteModal from "../deleteModal/DeleteModal";
+import fp from 'lodash/fp';
 
 const CleatTable = () => {
 
     const [data, setData] = useState([]);
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
-    const [showDeleteCleatModal, setShowDeleteCleatModal] = useState(false);
-    // let cleatToDelete;
-
+    const [cleatToDelete, setCleatToDelete] = useState(null);
+    
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
+            if (fp.isEqual(response.data, data)) {
+                return;
+            }
             setData(response.data);
         })
     }, [data]);
@@ -35,23 +38,21 @@ const CleatTable = () => {
     }
 
     const deleteCleat = (cleatName) => {
-        // add "are you sure you want to delete?" 
-        // also, who should be able to delete the cleat?
         Axios.delete(`http://localhost:3001/api/delete/${cleatName}`);
-        // setData(data => 
-        //     data.filter(cleat => {
-        //         return cleat.cleatName !== cleatName;
-        //     })
-        // );
+        setData(data => 
+            data.filter(cleat => {
+                return cleat.cleatName !== cleatName;
+            })
+        );
+        setCleatToDelete(null);
     }
 
-    // const onDeleteClick = (cleat) => {
-    //     // cleatToDelete = cleat;
-    //     // setShowDeleteCleatModal(true);
-    // }
+    const onDeleteClick = (cleat) => {
+        setCleatToDelete(cleat);
+    }
 
     return (
-        <>
+        <div className="cleat-table">
             <table>
                 <tbody>
                     <tr className="header-row">
@@ -71,10 +72,7 @@ const CleatTable = () => {
                                 <td className="year-col">{cleat.releaseYear}</td>
                                 <td className="rating-col">{cleat.rating}</td>
                                 <td className="delete-col">
-                                    <button className="delete-icon" onClick={() => {
-                                        // cleatToDelete = cleat;
-                                        setShowDeleteCleatModal(true);
-                                    }}>
+                                    <button className="delete-icon" onClick={() => onDeleteClick(cleat)}>
                                         X
                                     </button>
                                 </td>
@@ -94,19 +92,17 @@ const CleatTable = () => {
                     </tr>
                 </tbody>
             </table>
-            <Modal
+            {showAddCleatModal && <Modal
                 handleClose={() => setShowAddCleatModal(false)}
                 handleSumbit={onAddCleatSumbit}
-                show={showAddCleatModal} >
-            </Modal>
-            <DeleteModal
-                setShowModal={setShowDeleteCleatModal}
+                show={showAddCleatModal}
+            />}
+            {cleatToDelete && <DeleteModal
+                cleat={cleatToDelete}
                 handleDelete={deleteCleat}
-                show={showDeleteCleatModal}
-                // cleat={cleatToDelete} 
-                >
-            </DeleteModal>
-        </>
+                setCleatToDelete={setCleatToDelete}
+            />}
+        </div>
     )
 };
 

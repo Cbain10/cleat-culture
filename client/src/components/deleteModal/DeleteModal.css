@@ -1,11 +1,3 @@
-.display-block {
-    display: block;
-}
-  
-.display-none {
-    display: none;
-}
-
 .modal {
     color: black;
     position: fixed;
@@ -14,10 +6,33 @@
     width:100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mod {
     height: 400px;
     width: 600px;
     background-color: white;
+}
+
+.btn {
+    height: 50px;
+    width: 200px;
+    margin: 30px 10px 10px 0px;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.delete-btn {
+    background-color: #Fbcfcf;
+}
+
+.top-text {
+    padding-top: 30px;
+}
+
+.cleat-name-text {
+    font-size: x-large;
 }
