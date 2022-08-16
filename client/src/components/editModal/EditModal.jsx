@@ -24,8 +24,8 @@ const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
     return (
         <div className="modal">
             <div className="form-perimeter">
-                <p className="top-text">Editing</p>
                 <p className="cleat-name-text">{name}</p>
+                <img alt={cleat.imageURL} src={cleat.imageURL} height="100px" width="145px" />
                 <hr/>
                 <form>
                     <label>Cleat name:
@@ -69,7 +69,7 @@ const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
                     </label>
                 </form>
                 <button
-                    className="delete-btn btn"
+                    className="update-btn btn"
                     type="button"
                     onClick={onUpdate} >
                         Update

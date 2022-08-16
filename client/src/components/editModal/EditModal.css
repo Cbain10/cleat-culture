@@ -9,17 +9,14 @@
 }
 
 .form-perimeter {
-    height: 500px;
+    height: 550px;
     width: 600px;
     background-color: white;
 }
 
-.top-text {
-    padding-top: 10px;
-}
-
 .cleat-name-text {
     margin: 0px;
+    padding-top: 20px;
     padding-bottom: 20px;
     font-size: xx-large;
 }
@@ -28,4 +25,17 @@ form {
     padding: 10px;
     margin-top: 10px;
     font-size: 16pt;
+}
+
+img {
+    padding-bottom: 10px;
+}
+
+.btn {
+    margin-top: 15px;
+}
+
+.update-btn {
+    background-color: #Dbe2fd
+    ;
 }
