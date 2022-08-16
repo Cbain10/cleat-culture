@@ -45,11 +45,17 @@ tr {
 }
 
 .delete-col {
-    width: 5%;
+    width: 7%;
 }
 
-.delete-icon {
+.delete-cleat-btn {
+    padding-top: 2px;
     color: red;
+}
+
+.edit-cleat-btn {
+    padding-top: 2px;
+    margin-left: 2px;
 }
 
 .add-btn {

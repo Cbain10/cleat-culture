@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import './Modal.css';
+import React from "react";
+import { useState } from "react";
+import './EditModal.css';
 
-const Modal = ({ handleClose, handleSumbit }) => {
+const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
 
-    const [name, setName] = useState('');
-    const [brand, setBrand] = useState('');
-    const [year, setYear] = useState('');
-    const [rating, setRating] = useState('');
-    const [url, setUrl] = useState('');
+    const [name, setName] = useState(cleat.cleatName);
+    const [brand, setBrand] = useState(cleat.brand);
+    const [year, setYear] = useState(cleat.releaseYear);
+    const [rating, setRating] = useState(cleat.rating);
+    const [url, setUrl] = useState(cleat.imageURL);
 
-    const disabled = !(
-        name !== '' &&
-        brand !== '' &&
-        year !== '' &&
-        rating !== '' &&
-        url !== ''
-    )
-
-    const onSubmit = () => {
+    const onUpdate = () => {
         const newCleat = {
             "name": name,
             "brand": brand,
@@ -25,26 +18,15 @@ const Modal = ({ handleClose, handleSumbit }) => {
             "rating": rating,
             "photo": url,
         };
-        clearData();
-        handleSumbit(newCleat);
-    }
-    
-    const onClose = () => {
-        clearData();
-        handleClose();
-    }
-
-    const clearData = () => {
-        setName('');
-        setBrand('');
-        setYear('');
-        setRating('');
-        setUrl('');
+        handleUpdate(newCleat);
     }
 
     return (
         <div className="modal">
             <div className="form-perimeter">
+                <p className="top-text">Editing</p>
+                <p className="cleat-name-text">{name}</p>
+                <hr/>
                 <form>
                     <label>Cleat name:
                         <input
@@ -89,16 +71,15 @@ const Modal = ({ handleClose, handleSumbit }) => {
                 <button
                     className="delete-btn btn"
                     type="button"
-                    disabled={disabled}
-                    onClick={onSubmit} >
-                        Submit
+                    onClick={onUpdate} >
+                        Update
                 </button>
-                <button className="btn" type="button" onClick={onClose}>
+                <button className="btn" type="button" onClick={() => setCleatToEdit(null)}>
                     Close
                 </button>
             </div>
         </div>
-    );
+    )
 }
 
-export default Modal;
+export default EditModal;
