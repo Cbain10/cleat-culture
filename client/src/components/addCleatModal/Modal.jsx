@@ -44,7 +44,7 @@ const Modal = ({ handleClose, handleSumbit }) => {
 
     return (
         <div className="modal">
-            <div className="form-perimeter">
+            <div className="add-form-perimeter">
                 <form>
                     <label>Cleat name:
                         <input
