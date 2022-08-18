@@ -55,10 +55,23 @@ const CleatTable = () => {
     }
 
     const updateCleat = (cleat) => {
-        // likely need to call GET api again after updating... unless you want to iterate through the entire array of cleats to find the one to update????
-        // Axios.put();
-        console.log(cleat);
-        console.log('updating cleat...');
+        Axios.put("http://localhost:3001/api/update",
+            {
+                cleatName: cleat.cleatName,
+                brand: cleat.brand,
+                releaseYear: cleat.releaseYear,
+                rating: cleat.rating,
+                imageURL: cleat.imageURL
+            }
+        );
+        const updatedData = [...data];
+        for (let i = 0; i < updatedData.length; i++) {
+            if (updatedData[i].cleatName === cleat.cleatName) {
+                updatedData[i] = cleat;
+                break;
+            }
+        }
+        setData(updatedData);
         setCleatToEdit(null);
     }
 
@@ -83,7 +96,7 @@ const CleatTable = () => {
                             return (
                                 <tr className={`item-row ${key % 2 === 0 ? "dark" : "light"}`} key={key}>
                                     <td className="image-col">
-                                        <img alt={cleat.imageURL} src={cleat.imageURL} height="70px" width="100px" />
+                                        <img alt={cleat.cleatName} src={cleat.imageURL} height="70px" width="100px" />
                                     </td>
                                     <td className="cleat-name-col">{cleat.cleatName}</td>
                                     <td className="rating-col">{cleat.brand}</td>

@@ -49,6 +49,20 @@ app.delete('/api/delete/:cleatName', (req, res) => {
     })
 })
 
+app.put('/api/update', (req, res) => {
+    const cleatName = req.body.cleatName;
+    const brand = req.body.brand;
+    const releaseYear = req.body.releaseYear;
+    const rating = req.body.rating;
+    const imageURL = req.body.imageURL;
+
+    const sqlUpdate = "UPDATE cleats SET brand = ?, releaseYear = ?, rating = ?, imageURL = ? WHERE cleatName = ?";
+
+    db.query(sqlUpdate, [brand, releaseYear, rating, imageURL, cleatName], (err, result) => {
+        console.log(err);
+    })
+})
+
 app.listen(3001, () => {
     console.log('running on port 3001...');
 })

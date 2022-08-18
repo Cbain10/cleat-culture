@@ -4,19 +4,18 @@ import './EditModal.css';
 
 const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
 
-    const [name, setName] = useState(cleat.cleatName);
     const [brand, setBrand] = useState(cleat.brand);
-    const [year, setYear] = useState(cleat.releaseYear);
+    const [releaseYear, setReleaseYear] = useState(cleat.releaseYear);
     const [rating, setRating] = useState(cleat.rating);
-    const [url, setUrl] = useState(cleat.imageURL);
+    const [imageURL, setImageURL] = useState(cleat.imageURL);
 
     const onUpdate = () => {
         const newCleat = {
-            "name": name,
+            "cleatName": cleat.cleatName,
             "brand": brand,
-            "year": year,
+            "releaseYear": releaseYear,
             "rating": rating,
-            "photo": url,
+            "imageURL": imageURL,
         };
         handleUpdate(newCleat);
     }
@@ -24,18 +23,10 @@ const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
     return (
         <div className="modal">
             <div className="form-perimeter">
-                <p className="cleat-name-text">{name}</p>
-                <img alt={cleat.imageURL} src={cleat.imageURL} height="100px" width="145px" />
+                <p className="cleat-name-text">{cleat.cleatName}</p>
+                <img alt={cleat.cleatName} src={cleat.imageURL} height="100px" width="145px" />
                 <hr/>
                 <form>
-                    <label>Cleat name:
-                        <input
-                            type="text" 
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </label>
-                    <br/>
                     <label>Brand:
                         <input
                             type="text" 
@@ -47,8 +38,8 @@ const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
                     <label>Release year:
                         <input
                             type="number" 
-                            value={year}
-                            onChange={(e) => setYear(e.target.value)}
+                            value={releaseYear}
+                            onChange={(e) => setReleaseYear(e.target.value)}
                         />
                     </label>
                     <br/>
@@ -63,8 +54,8 @@ const EditModal = ({ cleat, handleUpdate, setCleatToEdit }) => {
                     <label>Image URL:
                         <input
                             type="text" 
-                            value={url}
-                            onChange={(e) => setUrl(e.target.value)}
+                            value={imageURL}
+                            onChange={(e) => setImageURL(e.target.value)}
                         />
                     </label>
                 </form>
