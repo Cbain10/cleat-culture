@@ -3,32 +3,18 @@ import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import Axios from 'axios';
 import { useEffect } from "react";
-import DeleteModal from "../deleteModal/DeleteModal";
-import EditModal from "../editModal/EditModal";
-import fp from 'lodash/fp';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 const CleatTable = () => {
-    // NEED TO ADD
-        // EDIT CLEAT
-        // SORT CLEATS
-        // ADD review
-            // read reviews VIEW
 
     const [data, setData] = useState([]);
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
-    const [cleatToDelete, setCleatToDelete] = useState(null);
-    const [cleatToEdit, setCleatToEdit] = useState(null);
+    const [ascending, setAscending] = useState(false);
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/get').then((response) => {
-            if (fp.isEqual(response.data, data)) {
-                return;
-            }
             setData(response.data);
         })
-    }, [data]);
+    }, []);
 
     const onAddCleatSumbit = (cleat) => {
         Axios.post("http://localhost:3001/api/insert",
@@ -44,39 +30,82 @@ const CleatTable = () => {
         setData([...data, cleat]);
     }
 
-    const deleteCleat = (cleatName) => {
-        Axios.delete(`http://localhost:3001/api/delete/${cleatName}`);
-        setData(data => 
-            data.filter(cleat => {
-                return cleat.cleatName !== cleatName;
-            })
-        );
-        setCleatToDelete(null);
-    }
-
-    const updateCleat = (cleat) => {
-        Axios.put("http://localhost:3001/api/update",
-            {
-                cleatName: cleat.cleatName,
-                brand: cleat.brand,
-                releaseYear: cleat.releaseYear,
-                rating: cleat.rating,
-                imageURL: cleat.imageURL
-            }
-        );
-        const updatedData = [...data];
-        for (let i = 0; i < updatedData.length; i++) {
-            if (updatedData[i].cleatName === cleat.cleatName) {
-                updatedData[i] = cleat;
-                break;
-            }
+    const sortCleats = () => {
+        let newData = [...data];
+        if (!ascending) {
+            newData.sort((a,b) => {
+                return a.cleatName > b.cleatName ? 1 : -1;
+            });
+        } else {
+            newData.sort((a,b) => {
+                return a.cleatName < b.cleatName ? 1 : -1;
+            });
         }
-        setData(updatedData);
-        setCleatToEdit(null);
+        setAscending(!ascending);
+        setData(newData);
     }
 
-    const onDeleteClick = (cleat) => {
-        setCleatToDelete(cleat);
+    const sortByBrand = () => {
+        let newData = [...data];
+        if (!ascending) {
+            newData.sort((a,b) => {
+                if (a.brand === b.brand) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.brand > b.brand ? 1 : -1;
+            });
+        } else {
+            newData.sort((a,b) => {
+                if (a.brand === b.brand) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.brand < b.brand ? 1 : -1;
+            });
+        }
+        setAscending(!ascending);
+        setData(newData);
+    }
+
+    const sortByYear = () => {
+        let newData = [...data];
+        if (!ascending) {
+            newData.sort((a,b) => {
+                if (a.releaseYear === b.releaseYear) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.releaseYear > b.releaseYear ? 1 : -1;
+            });
+        } else {
+            newData.sort((a,b) => {
+                if (a.releaseYear === b.releaseYear) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.releaseYear < b.releaseYear ? 1 : -1;
+            });
+        }
+        setAscending(!ascending);
+        setData(newData);
+    }
+
+    const sortByRating = () => {
+        let newData = [...data];
+        if (!ascending) {
+            newData.sort((a,b) => {
+                if (a.rating === b.rating) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.rating > b.rating ? 1 : -1;
+            });
+        } else {
+            newData.sort((a,b) => {
+                if (a.rating === b.rating) {
+                    return a.cleatName > b.cleatName ? 1 : -1;
+                }
+                return a.rating < b.rating ? 1 : -1;
+            });
+        }
+        setAscending(!ascending);
+        setData(newData);
     }
 
     return (
@@ -86,11 +115,10 @@ const CleatTable = () => {
                     <tbody>
                         <tr className="header-row">
                             <th className="image-col">Image</th>
-                            <th>Cleat</th>
-                            <th>Brand</th>
-                            <th>Year</th>
-                            <th>Rating</th>
-                            <th className="delete-col"></th>
+                            <th onClick={sortCleats}>Cleat</th>
+                            <th onClick={sortByBrand}>Brand</th>
+                            <th onClick={sortByYear}>Year</th>
+                            <th onClick={sortByRating}>Rating</th>
                         </tr>
                         {data.map((cleat, key) => {
                             return (
@@ -102,14 +130,6 @@ const CleatTable = () => {
                                     <td className="rating-col">{cleat.brand}</td>
                                     <td className="year-col">{cleat.releaseYear}</td>
                                     <td className="rating-col">{cleat.rating}</td>
-                                    <td className="delete-col">
-                                        <button className="delete-cleat-btn" onClick={() => onDeleteClick(cleat)}>
-                                            <FontAwesomeIcon icon={faTrashCan} />
-                                        </button>
-                                        <button className="edit-cleat-btn" onClick={() => setCleatToEdit(cleat)}>
-                                            <FontAwesomeIcon icon={faEdit} />
-                                        </button>
-                                    </td>
                                 </tr>
                                 
                             )
@@ -130,16 +150,6 @@ const CleatTable = () => {
                     handleClose={() => setShowAddCleatModal(false)}
                     handleSumbit={onAddCleatSumbit}
                     show={showAddCleatModal}
-                />}
-                {cleatToDelete && <DeleteModal
-                    cleat={cleatToDelete}
-                    handleDelete={deleteCleat}
-                    setCleatToDelete={setCleatToDelete}
-                />}
-                {cleatToEdit && <EditModal
-                    cleat={cleatToEdit}
-                    handleUpdate={updateCleat}
-                    setCleatToEdit={setCleatToEdit}
                 />}
             </div>
         </>
