@@ -3,6 +3,7 @@ import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import Axios from 'axios';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const CleatTable = () => {
 
@@ -126,7 +127,9 @@ const CleatTable = () => {
                                     <td className="image-col">
                                         <img alt={cleat.cleatName} src={cleat.imageURL} height="70px" width="100px" />
                                     </td>
-                                    <td className="cleat-name-col">{cleat.cleatName}</td>
+                                    <td className="cleat-name-col">
+                                        <Link to={`/cleat/${cleat.id}`}>{cleat.cleatName}</Link>
+                                    </td>
                                     <td className="rating-col">{cleat.brand}</td>
                                     <td className="year-col">{cleat.releaseYear}</td>
                                     <td className="rating-col">{cleat.rating}</td>
