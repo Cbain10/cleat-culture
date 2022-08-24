@@ -1,8 +1,15 @@
-import Axios from "axios"
+import Axios from 'axios';
 
 async function getAllCleats() {
     const result = await Axios.get('http://localhost:3001/api/get');
     return result || [];
+}
+
+async function getCleat(id) {
+    const url = `http://localhost:3001/api/get/${id}`;
+    const result = await Axios.get(url);
+    console.log(result);
+    return result || null;
 }
 
 async function addCleat(cleat) {
@@ -19,5 +26,6 @@ async function addCleat(cleat) {
 
 export const cleatService = {
     getAllCleats,
+    getCleat,
     addCleat
 }

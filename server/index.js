@@ -23,6 +23,16 @@ app.get('/api/get', (req, res) => {
     });
 });
 
+app.get('/api/get/:id', (req, res) => {
+    const id = req.params.id;
+    const sqlSelect = "SELECT * FROM cleats WHERE id = ?";
+    db.query(sqlSelect, id, (err, result) => {
+        // res.send(result);
+        console.log(err);
+        console.log(result);
+    })
+})
+
 app.post('/api/insert', (req, res) => {
 
     const cleatName = req.body.cleatName;
