@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
-import Axios from 'axios';
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { cleatService } from "../../services/CleatService";
 
 const CleatTable = () => {
 
@@ -12,21 +12,14 @@ const CleatTable = () => {
     const [ascending, setAscending] = useState(false);
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/get').then((response) => {
-            setData(response.data);
-        })
+        cleatService.getAllCleats()
+            .then((response) => {
+                setData(response.data);
+            })
     }, []);
 
     const onAddCleatSumbit = (cleat) => {
-        Axios.post("http://localhost:3001/api/insert",
-            {
-                cleatName: cleat.name,
-                brand: cleat.brand,
-                releaseYear: cleat.year,
-                rating: cleat.rating,
-                imageURL: cleat.photo,
-            },
-        );
+        cleatService.addCleat(cleat);
         setShowAddCleatModal(false);
         setData([...data, cleat]);
     }
@@ -137,7 +130,6 @@ const CleatTable = () => {
                                 
                             )
                         })}
-                        
                         <tr className="add-row">
                             <td>
                                 <button
