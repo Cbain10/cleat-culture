@@ -1,4 +1,3 @@
-// import Axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,20 +10,23 @@ const CleatPage = () => {
     const pathname = location.pathname;
     const cleatId = pathname.substring(pathname.lastIndexOf('/') + 1);
 
-    const [cleat, setCleat] = useState(null);
+    const [cleat, setCleat] = useState();
 
     useEffect(() => {
         cleatService.getCleat(cleatId)
             .then((response) => {
-                console.log(response.data);
-                setCleat(response.data);
+                setCleat(response.data[0]);
             })
-    }, []);
+    }, [cleatId]);
 
     return (
         <>
-            <h1>CLEATS</h1>
-            {cleat !== null && <p>{cleat}</p>}
+            {cleat && 
+                <div>
+                    <img alt={cleat.cleatName} src={cleat.imageURL} height="280px" width="400px" />
+                    <h3>{cleat.cleatName}</h3>
+                </div>
+            }
         </>
     )
 }

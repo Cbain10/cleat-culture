@@ -8,7 +8,6 @@ async function getAllCleats() {
 async function getCleat(id) {
     const url = `http://localhost:3001/api/get/${id}`;
     const result = await Axios.get(url);
-    console.log(result);
     return result || null;
 }
 
