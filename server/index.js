@@ -4,8 +4,12 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const mysqlHost = process.env.MYSQL_HOST || 'localhost';
+const mysqlPort = process.env.MYSQL_PORT || '3003';
+
 const db = mysql.createPool({
-    host: "localhost",
+    host: mysqlHost,
+    port: mysqlPort,
     user: "root",
     password: "password",
     database: "CleatsDB"
