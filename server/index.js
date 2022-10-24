@@ -20,6 +20,7 @@ app.get('/api/get', (req, res) => {
 
     db.query(sqlSelect, (err, result) => {
         res.send(result);
+        console.log(result);
     });
 });
 
