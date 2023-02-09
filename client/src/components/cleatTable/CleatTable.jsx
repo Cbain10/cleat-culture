@@ -11,6 +11,33 @@ const CleatTable = () => {
     const [showAddCleatModal, setShowAddCleatModal] = useState(false);
     const [ascending, setAscending] = useState(false);
 
+    /*  ideally the table component should just be a reusable component... non specific 
+        Need to find table component that can display (and maybe sort) the cleats - images were issues****
+
+        what else could use a table...?
+        if its just like a kendo table or react table, should only need styling. 
+        if more custom, again make it's own component - but needs to sort based off parameters/generics
+
+        add a wrapper for this component which handles the api calls and gets the data to pass in
+        all sorting should be taken care of in the generic table component
+        all data fetching and data formating should be done in parent component
+
+        EXAMPLE
+            const CleatTable = {
+                // fetches data from cleatService
+                cleatData = cleatService.getCleats()...
+                
+                return (
+                    <GenericTable data={cleatData} />
+                )
+            }
+
+            const Home = {
+                return (
+                    <CleatTable />
+                )
+            }
+    */
     useEffect(() => {
         cleatService.getAllCleats()
             .then((response) => {
@@ -24,6 +51,7 @@ const CleatTable = () => {
         setData([...data, cleat]);
     }
 
+    // SORTING -----------------------------------------------
     const sortCleats = () => {
         let newData = [...data];
         if (!ascending) {
@@ -38,7 +66,6 @@ const CleatTable = () => {
         setAscending(!ascending);
         setData(newData);
     }
-
     const sortByBrand = () => {
         let newData = [...data];
         if (!ascending) {
@@ -59,7 +86,6 @@ const CleatTable = () => {
         setAscending(!ascending);
         setData(newData);
     }
-
     const sortByYear = () => {
         let newData = [...data];
         if (!ascending) {
@@ -80,7 +106,6 @@ const CleatTable = () => {
         setAscending(!ascending);
         setData(newData);
     }
-
     const sortByRating = () => {
         let newData = [...data];
         if (!ascending) {
@@ -101,6 +126,7 @@ const CleatTable = () => {
         setAscending(!ascending);
         setData(newData);
     }
+    // END SORTING -------------------------------------------
 
     return (
         <>
