@@ -14,6 +14,12 @@ const CleatPage = () => {
 
     const [cleat, setCleat] = useState();
     // const [reviews, setReviews] = useState([]);
+    // useEffect(() => {
+    //     reviewService.getReviews(cleatId)
+    //         .then((response) => {
+    //             setReviews(response.data);
+    //         })
+    // });
 
     const reviews = [
         {
@@ -40,27 +46,29 @@ const CleatPage = () => {
             })
     }, [cleatId]);
 
+    const foundCleat = cleat ? 
+        <div className="cleat-section">
+            <h2>{cleat.cleatName}</h2>
+            <img alt={cleat.cleatName} src={cleat.imageURL} height="280px" width="400px" />
+            <div className="cleat-specs">
+                <p>Brand - {cleat.brand}</p>
+                <p>Release Year - {cleat.releaseYear}</p>
+                <p>Rating - {cleat.rating}</p>
+            </div>
+            <h3>Reviews</h3>
+            {reviews.map((review, key) => {
+                return (
+                    <CleatReview
+                        review={review}
+                    />
+                )
+            })}
+        </div> : 
+        <p>There is no cleat matching that id</p>;
+
     return (
         <>
-            {cleat && 
-                <div className="cleat-section">
-                    <h2>{cleat.cleatName}</h2>
-                    <img alt={cleat.cleatName} src={cleat.imageURL} height="280px" width="400px" />
-                    <div className="cleat-specs">
-                        <p>Brand - {cleat.brand}</p>
-                        <p>Release Year - {cleat.releaseYear}</p>
-                        <p>Rating - {cleat.rating}</p>
-                    </div>
-                    <h3>Reviews</h3>
-                    {reviews.map((review, key) => {
-                        return (
-                            <CleatReview
-                                review={review}
-                            />
-                        )
-                    })}
-                </div>
-            }
+            {foundCleat}
         </>
     )
 }
