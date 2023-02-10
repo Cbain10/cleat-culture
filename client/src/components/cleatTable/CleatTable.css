@@ -1,6 +1,8 @@
 .cleat-table {
     display: flex;
     margin-bottom: 80px;
+    height: 630px;
+    width: '100%';
 }
 
 table {

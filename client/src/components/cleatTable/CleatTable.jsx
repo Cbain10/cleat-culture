@@ -44,14 +44,20 @@ const CleatTable = () => {
             })
     }, []);
 
+    const columns = [
+        {field: 'imageURL', headerName: 'Image', type: 'imgage', width: 200},
+        {field: 'cleatName', headerName: 'Cleat', width: 600},
+        {field: 'brand', headerName: 'Brand', width: 140},
+        {field: 'releaseYear', headerName: 'Year', width: 100},
+        {field: 'rating', headerName: 'Rating', type: 'number', width: 100},
+    ]
+
     return (
         <div className="cleat-table">
-            <DataGrid 
-                rows={rows}
+            <DataGrid
+                rows={data}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
+                pageSize={10}
             />
         </div>
     )
