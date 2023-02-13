@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './CleatTable.css';
 import { useEffect } from "react";
 import { cleatService } from "../../services/CleatService";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataTable } from "../dataTable/DataTable";
 
 const CleatTable = () => {
 
@@ -60,14 +60,12 @@ const CleatTable = () => {
 
     return (
         <div className="cleat-table">
-            <div style={{flexGrow: 1}}>
-                <DataGrid
-                    rows={data}
-                    rowHeight={70}
-                    columns={columns}
-                    pageSize={10}
-                />
-            </div>
+            <DataTable
+                data={data}
+                columns={columns}
+                rowHeight={70}
+                pageSize={10}
+            />
         </div>
     )
 };
