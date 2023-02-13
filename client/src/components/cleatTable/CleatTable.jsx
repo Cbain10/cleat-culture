@@ -45,7 +45,13 @@ const CleatTable = () => {
     }, []);
 
     const columns = [
-        {field: 'imageURL', headerName: 'Image', type: 'imgage', width: 200},
+        {
+            field: 'imageURL',
+            headerName: 'Image',
+            type: 'imgage',
+            width: 200,
+            renderCell: (params) => <img src={params.value} style={{height: 70, width: 100, justifyContent: "center", alignContent: "center"}} alt="bacon" />
+        },
         {field: 'cleatName', headerName: 'Cleat', width: 600},
         {field: 'brand', headerName: 'Brand', width: 140},
         {field: 'releaseYear', headerName: 'Year', width: 100},
@@ -54,11 +60,14 @@ const CleatTable = () => {
 
     return (
         <div className="cleat-table">
-            <DataGrid
-                rows={data}
-                columns={columns}
-                pageSize={10}
-            />
+            <div style={{flexGrow: 1}}>
+                <DataGrid
+                    rows={data}
+                    rowHeight={70}
+                    columns={columns}
+                    pageSize={10}
+                />
+            </div>
         </div>
     )
 };
