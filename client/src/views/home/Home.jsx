@@ -1,11 +1,13 @@
 import React from "react";
-import CleatTable from "../../components/cleatTable/CleatTable";
+import NavBar from "../../components/navBar/NavBar";
+import { NewsSection } from "../../components/newsSection/NewsSection";
 
 const Home = () => {
     return (
-        <>
-            <CleatTable />
-        </>
+        <div>
+            <NavBar />
+            <NewsSection />
+        </div>
     )
 }
 
