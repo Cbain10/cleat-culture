@@ -1,10 +1,16 @@
 import React from "react";
-import CleatTable from "../../components/cleatTable/CleatTable";
+import LookupCleatButton from "../../components/lookupCleatButton/LookupCleatButton";
+import RecommendCleatButton from "../../components/recommendCleatButton/RecommendCleatButton";
+import './Home.css';
 
 const Home = () => {
     return (
         <>
-            <CleatTable />
+            <div className="button-container">
+                <LookupCleatButton />
+                <div className="divider"/>
+                <RecommendCleatButton />
+            </div>
         </>
     )
 }
