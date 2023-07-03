@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
+// getAllCleats() endpoint
 app.get('/api/get', (req, res) => {
     const sqlSelect = "SELECT * FROM cleats"
 
@@ -23,6 +24,7 @@ app.get('/api/get', (req, res) => {
     });
 });
 
+// getCleat(id) endpoint
 app.get('/api/get/:id', (req, res) => {
     const id = req.params.id;
     const sqlSelect = "SELECT * FROM cleats WHERE id = ?";
@@ -30,11 +32,11 @@ app.get('/api/get/:id', (req, res) => {
         res.send(result);
         console.log(err);
         console.log(result);
-    })
-})
+    });
+});
 
+// addCleat(cleat) endpoint
 app.post('/api/insert', (req, res) => {
-
     const cleatName = req.body.cleatName;
     const brand = req.body.brand;
     const releaseYear = req.body.releaseYear;
@@ -46,8 +48,9 @@ app.post('/api/insert', (req, res) => {
     db.query(sqlInsert, [cleatName, brand, releaseYear, rating, imageURL], (err, result) => {
         console.log(result);
     });
-})
+});
 
+// deleteCleat() endpoint?
 app.delete('/api/delete/:cleatName', (req, res) => {
     // delete by id or delete by name?
     // both unique identifiers...
@@ -56,9 +59,10 @@ app.delete('/api/delete/:cleatName', (req, res) => {
 
     db.query(sqlDelete, cleatName, (err, res) => {
         console.log(err);
-    })
-})
+    });
+});
 
+// updateCleat() endpoint
 app.put('/api/update', (req, res) => {
     const cleatName = req.body.cleatName;
     const brand = req.body.brand;
@@ -70,9 +74,9 @@ app.put('/api/update', (req, res) => {
 
     db.query(sqlUpdate, [brand, releaseYear, rating, imageURL, cleatName], (err, result) => {
         console.log(err);
-    })
-})
+    });
+});
 
 app.listen(3001, () => {
     console.log('running on port 3001...');
-})
+});
