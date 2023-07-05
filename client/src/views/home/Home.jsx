@@ -17,7 +17,7 @@ const Home = () => {
     })
 
     const [aspect, setAspect] = useState('');
-    // const [result, setResult] = useState('');
+    const [result, setResult] = useState('');
 
     const getBestCleatHandler = () => {
         // aspect is already set with correct value
@@ -32,9 +32,8 @@ const Home = () => {
         };
         fetch("https://wh3ke50kv4.execute-api.us-east-2.amazonaws.com/dev", requestOptions)
             .then(response => response.text())
-            .then(result => alert(JSON.parse(result).body))
+            .then(result => setResult(JSON.parse(result).body))
             .catch(error => console.log('error', error));
-        console.log(aspect);
     }
 
     return (
@@ -53,7 +52,7 @@ const Home = () => {
                 <button onClick={getBestCleatHandler}>Get Best Cleat</button>
             </div>
             <h1>
-                {/* RESULT: {result} */}
+                RESULT: {result}
             </h1>
         </>
     )
