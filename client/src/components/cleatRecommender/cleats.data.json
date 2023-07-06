@@ -1,0 +1,255 @@
+[
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Mercurial Vapor 15",
+            "brand": "Nike",
+            "releaseYear": 2023,
+            "upper": "knitted",
+            "comfort": 6,
+            "width": 5,
+            "lockdown": 9
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Phantom GX",
+            "brand": "Nike",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Phatom Luna",
+            "brand": "Nike",
+            "releaseYear": 2023,
+            "upper": "knitted",
+            "comfort": 7,
+            "width": 7,
+            "lockdown": 7,
+            "womens": true
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Tiempo Legend 10 Elite",
+            "brand": "Nike",
+            "releaseYear": 2023,
+            "upper": "synthetic",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Tiempo Legend 9 Elite",
+            "brand": "Nike",
+            "releaseYear": 2022,
+            "upper": "leather",
+            "comfort": 9,
+            "width": 8,
+            "lockdown": 6
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Premier II",
+            "brand": "Nike",
+            "releaseYear": 2021,
+            "upper": "leather",
+            "comfort": 8,
+            "width": 8,
+            "lockdown": 6
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "CrazyFast+",
+            "brand": "Adidas",
+            "releaseYear": 2023,
+            "upper": "knitted",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 8
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Copa Pure+",
+            "brand": "Adidas",
+            "releaseYear": 2022,
+            "upper": "leather",
+            "comfort": 8,
+            "width": 8,
+            "lockdown": 5
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Copa Pure.1",
+            "brand": "Adidas",
+            "releaseYear": 2022,
+            "upper": "leather",
+            "comfort": 8,
+            "width": 8,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Predator Accuracy+",
+            "brand": "Adidas",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 5
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Predator Accuracy.1",
+            "brand": "Adidas",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 7,
+            "width": 7,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Copa Mundial",
+            "brand": "Adidas",
+            "releaseYear": 1980,
+            "upper": "leather",
+            "comfort": 10,
+            "width": 8,
+            "lockdown": 6
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Ultra Ultimate",
+            "brand": "Puma",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 7,
+            "width": 6,
+            "lockdown": 8
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "King Ultimate",
+            "brand": "Puma",
+            "releaseYear": 2023,
+            "upper": "synthetic",
+            "comfort": 7,
+            "width": 6,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Future Ultimate",
+            "brand": "Puma",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 9,
+            "width": 8,
+            "lockdown": 7
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "442 v2",
+            "brand": "New Balance",
+            "releaseYear": 2022,
+            "upper": "leather",
+            "comfort": 8,
+            "width": 10,
+            "lockdown": 6
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Furon v7",
+            "brand": "New Balance",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 8,
+            "width": 10,
+            "lockdown": 8
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Tekela",
+            "brand": "New Balance",
+            "releaseYear": 2022,
+            "upper": "knitted",
+            "comfort": 8,
+            "width": 10,
+            "lockdown": 5
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Morelia Neo III Bete",
+            "brand": "Mizuno",
+            "releaseYear": 2020,
+            "upper": "leather",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 8
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Morelia",
+            "brand": "Mizuno",
+            "releaseYear": 2018,
+            "upper": "leather",
+            "comfort": 9,
+            "width": 9,
+            "lockdown": 6
+        }
+    },
+    {
+        "tableName": "'Cleat'",
+        "Item": {
+            "cleatName": "Alpha",
+            "brand": "Mizuno",
+            "releaseYear": 2022,
+            "upper": "synthetic",
+            "comfort": 8,
+            "width": 7,
+            "lockdown": 8
+        }
+    }
+]

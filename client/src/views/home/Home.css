@@ -9,3 +9,7 @@
 .divider {
     width: 50px;
 }
+
+.recommend-header {
+    justify-content: center;
+}

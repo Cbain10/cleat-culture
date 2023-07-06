@@ -19,8 +19,8 @@ const Home = () => {
     const [aspect, setAspect] = useState('');
     const [result, setResult] = useState('');
 
+    // TODO move to services layer
     const getBestCleatHandler = () => {
-        // aspect is already set with correct value
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify({"aspect":aspect});
@@ -44,7 +44,7 @@ const Home = () => {
                 <RecommendCleatButton />
             </div>
             <div>
-                <p>What matters most for your cleats?</p>
+                <p className="recommend-header">What matters most for your cleats?</p>
                 <select
                     value={aspect}
                     onChange={(e) => setAspect(e.target.value)}
@@ -52,7 +52,8 @@ const Home = () => {
                 <button onClick={getBestCleatHandler}>Get Best Cleat</button>
             </div>
             <h1>
-                RESULT: {result}
+                BEST CLEAT FOR {aspect.toUpperCase()}:<br />
+                {result}
             </h1>
         </>
     )
