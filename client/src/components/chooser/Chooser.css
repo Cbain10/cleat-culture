@@ -6,10 +6,19 @@
     margin-top: 10px;
     border-radius: 5px;
     border: 1px solid black;
+    cursor: pointer;
     
 }
 
 .reset-values-button {
+    margin-top: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    border: 1px solid red;
+    padding: 15px;
+}
+.reset-results-button {
     margin-top: 20px;
     color: white;
     background-color: black;

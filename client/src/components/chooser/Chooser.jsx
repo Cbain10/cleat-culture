@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NumberPicker from 'react-widgets/NumberPicker';
-import { dynamoCleatService } from '../../services/serverless/DynamoCleatService'
+import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
+import ClipLoader from 'react-spinners/ClipLoader';
 import './Chooser.css';
 
 const Chooser = () => {
@@ -10,6 +11,7 @@ const Chooser = () => {
     const [comfort, setComfort] = useState(5);
     const [lockdown, setLockdown] = useState(5);
     const [result, setResult] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const uppers = [
         {value: 'knitted', text: "Knitted"},
@@ -23,8 +25,12 @@ const Chooser = () => {
     });
 
     const getCleatsHandler = () => {
+        setLoading(true);
         dynamoCleatService.axiosGetCleats(width, comfort, lockdown, upper)
-            .then((response) => setResult(response));
+            .then((response) => {
+                setResult(response);
+                setLoading(false);
+            });
     }
 
     const resetValuesHandler = () => {
@@ -77,16 +83,30 @@ const Chooser = () => {
                 <br />
 
                 <button className="get-cleats-button" onClick={getCleatsHandler}>Get Cleats</button>
-                <br></br>
+                <br />
                 <button className="reset-values-button" onClick={resetValuesHandler}>Reset Values</button>
+                <br />
+                <button className="reset-results-button" onClick={() => setResult([])}>Reset Results</button>
             </div>
 
             <div className='results-section'>
-                <h1>Results:</h1>
-                <br />
-                {result.map((boot) => {
-                    return <h3>{boot.brand} - {boot.cleatName}</h3>
-                })}
+                {loading && 
+                    <ClipLoader
+                       color={'red'}
+                       loading={true}
+                       size={150}
+                       aria-label='Loading Spinner'
+                    />
+                }
+                {!loading &&    
+                    <div>
+                        <h1>Results:</h1>
+                        <br />
+                        {result.map((boot) => {
+                            return <h3>{boot.brand} - {boot.cleatName}</h3>
+                        })}
+                    </div>
+                }
             </div>
         </div>
     )
