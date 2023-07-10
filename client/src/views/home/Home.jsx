@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LookupCleatButton from "../../components/lookupCleatButton/LookupCleatButton";
 import RecommendCleatButton from "../../components/recommendCleatButton/RecommendCleatButton";
+import { dynamoCleatService } from "../../services/serverless/DynamoCleatService";
 import './Home.css';
 
 const Home = () => {
@@ -19,21 +20,9 @@ const Home = () => {
     const [aspect, setAspect] = useState('');
     const [result, setResult] = useState('');
 
-    // TODO move to services layer
     const getBestCleatHandler = () => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        var raw = JSON.stringify({"aspect":aspect});
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        fetch("https://wh3ke50kv4.execute-api.us-east-2.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-            .then(result => setResult(JSON.parse(result).body))
-            .catch(error => console.log('error', error));
+        dynamoCleatService.getBestCleat(aspect)
+            .then(response => setResult(response));
     }
 
     return (

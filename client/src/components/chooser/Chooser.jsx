@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NumberPicker from 'react-widgets/NumberPicker';
+import { dynamoCleatService } from '../../services/serverless/DynamoCleatService'
 import './Chooser.css';
 
 const Chooser = () => {
@@ -22,24 +23,8 @@ const Chooser = () => {
     });
 
     const getCleatsHandler = () => {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        let raw = JSON.stringify({
-            "width":width,
-            "comfort":comfort,
-            "lockdown":lockdown,
-            "upper":upper
-        });
-        let requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        fetch("https://kkmt2wfxlk.execute-api.us-east-2.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-            .then(result => setResult(JSON.parse(result).body))
-            .catch(error => console.log('error', error));
+        dynamoCleatService.axiosGetCleats(width, comfort, lockdown, upper)
+            .then((response) => setResult(response));
     }
 
     const resetValuesHandler = () => {

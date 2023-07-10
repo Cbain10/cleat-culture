@@ -14,7 +14,7 @@
     color: white;
     background-color: black;
     border-radius: 5px;
-    border: 0px;
+    border: 1px solid red;
     padding: 15px;
 }
 
