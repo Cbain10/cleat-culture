@@ -4,16 +4,17 @@ import './Chooser.css';
 
 const Chooser = () => {
 
-    // meets criteria
     const [width, setWidth] = useState(5);
-    const [upper, setUpper] = useState('knit');
+    const [upper, setUpper] = useState('any');
     const [comfort, setComfort] = useState(5);
     const [lockdown, setLockdown] = useState(5);
+    const [result, setResult] = useState([]);
 
     const uppers = [
-        {value: 'knit', text: "Knit"},
+        {value: 'knitted', text: "Knitted"},
         {value: 'leather', text: "Leather"},
-        {value: 'synthetic', text: 'Synthetic'}
+        {value: 'synthetic', text: 'Synthetic'},
+        {value: 'any', text: 'Any'}
     ];
 
     const options = uppers.map((option) => {
@@ -21,67 +22,87 @@ const Chooser = () => {
     });
 
     const getCleatsHandler = () => {
-        // TODO make api gateway call here
-        console.log(width);
-        console.log(comfort);
-        console.log(lockdown);
-        console.log(upper);
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        let raw = JSON.stringify({
+            "width":width,
+            "comfort":comfort,
+            "lockdown":lockdown,
+            "upper":upper
+        });
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("https://kkmt2wfxlk.execute-api.us-east-2.amazonaws.com/dev", requestOptions)
+            .then(response => response.text())
+            .then(result => setResult(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+    }
 
-        /*
-
-            TODO
-                write lambda to get all cleats above criteria
-                connect lambda to dynamodb
-                set up api gateway 
-                connect api gateway to lambda
-                write call to api gateway
-
-        */
+    const resetValuesHandler = () => {
+        setComfort(5);
+        setWidth(5);
+        setLockdown(5);
+        setUpper('any');
     }
 
     return (
-        <div>
-            <h2>Let's find the right cleats for you!</h2>
+        <div className='chooser-container'>
+            <div className='aspects-section'>
+                <h2>Let's find the right cleats for you!</h2>
 
-            <div className="width-section">
-                <h3>Width</h3>
-                <NumberPicker
-                    defaultValue={5}
-                    max={10}
-                    min={0}
-                    onChange={width => setWidth(width)}
-                />
-            </div>
-            <div className="comfort-section">
-                <h3>Comfort</h3>
-                <NumberPicker
-                    defaultValue={5}
-                    max={10}
-                    min={0}
-                    onChange={comfort => setComfort(comfort)}
-                />
-            </div>
-            <div className="lockdown-section">
-                <h3>Lockdown</h3>
-                <NumberPicker
-                    defaultValue={5}
-                    max={10}
-                    min={0}
-                    onChange={lockdown => setLockdown(lockdown)}
-                />
+                <div className="width-section">
+                    <h3>Width</h3>
+                    <NumberPicker
+                        value={width}
+                        max={10}
+                        min={0}
+                        onChange={width => setWidth(width)}
+                    />
+                </div>
+                <div className="comfort-section">
+                    <h3>Comfort</h3>
+                    <NumberPicker
+                        value={comfort}
+                        max={10}
+                        min={0}
+                        onChange={comfort => setComfort(comfort)}
+                    />
+                </div>
+                <div className="lockdown-section">
+                    <h3>Lockdown</h3>
+                    <NumberPicker
+                        value={lockdown}
+                        max={10}
+                        min={0}
+                        onChange={lockdown => setLockdown(lockdown)}
+                    />
+                </div>
+
+                <div className="upper-section">
+                    <h3>Upper</h3>
+                    <select
+                        value={upper}
+                        onChange={(e) => setUpper(e.target.value)}
+                    >{options}</select>    
+                </div>
+                <br />
+
+                <button className="get-cleats-button" onClick={getCleatsHandler}>Get Cleats</button>
+                <br></br>
+                <button className="reset-values-button" onClick={resetValuesHandler}>Reset Values</button>
             </div>
 
-            <div className="upper-section">
-                <h3>Upper</h3>
-                <select
-                    value={upper}
-                    onChange={(e) => setUpper(e.target.value)}
-                >{options}</select>    
+            <div className='results-section'>
+                <h1>Results:</h1>
+                <br />
+                {result.map((boot) => {
+                    return <h3>{boot.brand} - {boot.cleatName}</h3>
+                })}
             </div>
-            <br />
-
-            <button className="get-cleats-button" onClick={getCleatsHandler}>Get Best Cleat</button>
-
         </div>
     )
 }

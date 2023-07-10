@@ -1,6 +1,37 @@
 .get-cleats-button {
-    width: 200px;
-    height: 100px;
+    padding: 30px;
     background-color: red;
     color: white;
+    font-size: 24px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    
 }
+
+.reset-values-button {
+    margin-top: 20px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    padding: 15px;
+}
+
+.chooser-container {
+    margin: auto;
+    width: 60%;
+}
+
+.aspects-section {
+    float: left;
+}
+
+.results-section {
+    float: right;
+}
+
+/* @use "react-widgets/styles.scss" with (
+    $widget-font-size: 20px,
+    $input-height: 2.5em
+) */
