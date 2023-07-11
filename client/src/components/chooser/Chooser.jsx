@@ -26,7 +26,7 @@ const Chooser = () => {
 
     const getCleatsHandler = () => {
         setLoading(true);
-        dynamoCleatService.axiosGetCleats(width, comfort, lockdown, upper)
+        dynamoCleatService.getCleatsByValue(width, comfort, lockdown, upper)
             .then((response) => {
                 setResult(response);
                 setLoading(false);
