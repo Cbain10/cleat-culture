@@ -29,7 +29,7 @@
 
 .chooser-container {
     margin: auto;
-    width: 60%;
+    width: 70%;
 }
 
 .aspects-section {
@@ -40,7 +40,26 @@
     float: right;
 }
 
-/* @use "react-widgets/styles.scss" with (
-    $widget-font-size: 20px,
-    $input-height: 2.5em
-) */
+.cleat-item {
+    padding: 30px 50px 50px 50px;
+    text-align: left;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    /* clear: both; */
+}
+
+.cleat-item-vals {
+    /* float: right; */
+    /* justify-content: left; */
+}
+
+.cleat-label {
+    display: inline-block;
+    padding-left: 20px;
+    font-size: 18pt;
+}
+
+.cleat-image {
+    float: left;
+}

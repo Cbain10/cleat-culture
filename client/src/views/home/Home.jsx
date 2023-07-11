@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import LookupCleatButton from "../../components/lookupCleatButton/LookupCleatButton";
 import RecommendCleatButton from "../../components/recommendCleatButton/RecommendCleatButton";
-import { dynamoCleatService } from "../../services/serverless/DynamoCleatService";
 import './Home.css';
 
 const Home = () => {
