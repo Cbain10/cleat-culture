@@ -13,6 +13,13 @@ async function getCleatsByValue(width, comfort, lockdown, upper) {
     return result.data.body;
 }
 
+async function getAllCleats() {
+    const url = 'https://lchbz8wmg4.execute-api.us-east-2.amazonaws.com/dev';
+    const result = await Axios.get(url);
+    return result.data.body;
+}
+
 export const dynamoCleatService = {
-    getCleatsByValue
+    getCleatsByValue,
+    getAllCleats
 }
