@@ -19,7 +19,17 @@ async function getAllCleats() {
     return result.data.body;
 }
 
+async function getCleatByName(name) {
+    const url = 'https://kkmt2wfxlk.execute-api.us-east-2.amazonaws.com/dev/name';
+    let params = {
+        cleatName: name
+    };
+    const result = await Axios.post(url, params);
+    return result.data.body;
+}
+
 export const dynamoCleatService = {
     getCleatsByValue,
-    getAllCleats
+    getAllCleats,
+    getCleatByName
 }

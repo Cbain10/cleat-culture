@@ -76,6 +76,7 @@ const CleatTable = () => {
                                 <th className="image-col">Image</th>
                                 <th onClick={sortCleats}>Cleat</th>
                                 <th onClick={sortByBrand}>Brand</th>
+                                <th>Overall</th>
                                 <th>Comfort</th>
                                 <th>Width</th>
                                 <th>Lockdown</th>
@@ -91,10 +92,11 @@ const CleatTable = () => {
                                             <Link to={`/cleat/${cleat.id}`}>{cleat.cleatName}</Link>
                                         </td>
                                         <td className="rating-col">{cleat.brand}</td>
+                                        <td className="year-col">{ ((cleat.comfort + cleat.width + cleat.lockdown) / 3).toFixed(1) }</td>
                                         <td className="year-col">{cleat.comfort}</td>
                                         <td className="rating-col">{cleat.width}</td>
                                         <td className="rating-col">{cleat.lockdown}</td>
-                                        <td className="rating-col">{cleat.upper}</td>
+                                        <td className="rating-col">{(cleat.upper).toUpperCase()}</td>
                                     </tr>
                                 )
                             })}

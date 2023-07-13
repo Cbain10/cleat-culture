@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NumberPicker from 'react-widgets/NumberPicker';
 import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { Link } from "react-router-dom";
 import './Chooser.css';
 
 const Chooser = () => {
@@ -104,18 +105,20 @@ const Chooser = () => {
                         <br />
                         {result.map((boot) => {
                             return (
-                                <div className="cleat-item">
-                                    {boot.imageUrl && 
-                                        <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
-                                    }
-                                    <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
-                                    {/* <div className="val-container">
-                                        <p className="cleat-item-vals">Width: {boot.width}</p>
-                                        <p className="cleat-item-vals">Comfort: {boot.comfort}</p>
-                                        <p className="cleat-item-vals">Lockdown: {boot.lockdown}</p>
-                                        <p className="cleat-item-vals">Upper: {boot.upper}</p>
-                                    </div> */}
-                                </div>
+                                <Link to={`/cleat/${boot.cleatName}`}>
+                                    <div className="cleat-item">
+                                        {boot.imageUrl &&
+                                            <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
+                                        }
+                                        <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
+                                        {/* <div className="val-container">
+                                            <p className="cleat-item-vals">Width: {boot.width}</p>
+                                            <p className="cleat-item-vals">Comfort: {boot.comfort}</p>
+                                            <p className="cleat-item-vals">Lockdown: {boot.lockdown}</p>
+                                            <p className="cleat-item-vals">Upper: {boot.upper}</p>
+                                        </div> */}
+                                    </div>
+                                </Link>
                             )
                         })}
                     </div>
