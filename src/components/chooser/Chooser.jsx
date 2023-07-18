@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import NumberPicker from 'react-widgets/NumberPicker';
 import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { Link } from "react-router-dom";
 import './Chooser.css';
+import { Slider } from "@mui/material";
 
 const Chooser = () => {
 
-    const [width, setWidth] = useState(5);
+    const [width, setWidth] = useState(3);
+    const [comfort, setComfort] = useState(3);
+    const [lockdown, setLockdown] = useState(3);
     const [upper, setUpper] = useState('any');
-    const [comfort, setComfort] = useState(5);
-    const [lockdown, setLockdown] = useState(5);
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ const Chooser = () => {
 
     const getCleatsHandler = () => {
         setLoading(true);
-        dynamoCleatService.getCleatsByValue(width, comfort, lockdown, upper)
+        dynamoCleatService.getCleatsByValue(width*2, comfort*2, lockdown*2, upper)
             .then((response) => {
                 setResult(response);
                 setLoading(false);
@@ -35,59 +35,77 @@ const Chooser = () => {
     }
 
     const resetValuesHandler = () => {
-        setComfort(5);
-        setWidth(5);
-        setLockdown(5);
+        setComfort(3);
+        setWidth(3);
+        setLockdown(3);
         setUpper('any');
     }
 
+    const marks = [
+        { value: 1, label: '1' },
+        { value: 2, label: '2' },
+        { value: 3, label: '3' },
+        { value: 4, label: '4' },
+        { value: 5, label: '5' }
+    ]
+
     return (
         <div className='chooser-container'>
-            <div className='aspects-section'>
-                <h2>Let's find the right cleats for you!</h2>
+            <h2>Let's find the right cleats for you!</h2>
+            <div className='aspects-container'>
 
                 <div className="width-section">
-                    <h3>Width</h3>
-                    <NumberPicker
+                    <h3>Width (1-5)</h3>
+                    <Slider
                         value={width}
-                        max={10}
-                        min={0}
-                        onChange={width => setWidth(width)}
+                        onChange={width => setWidth(width.target.value)}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
                     />
+
                 </div>
                 <div className="comfort-section">
-                    <h3>Comfort</h3>
-                    <NumberPicker
+                    <h3>Comfort (1-5)</h3>
+                    <Slider
                         value={comfort}
-                        max={10}
-                        min={0}
-                        onChange={comfort => setComfort(comfort)}
+                        onChange={e => setComfort(e.target.value)}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
                     />
                 </div>
                 <div className="lockdown-section">
-                    <h3>Lockdown</h3>
-                    <NumberPicker
+                    <h3>Lockdown (1-5)</h3>
+                    <Slider
                         value={lockdown}
-                        max={10}
-                        min={0}
-                        onChange={lockdown => setLockdown(lockdown)}
+                        onChange={e => setLockdown(e.target.value)}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
                     />
                 </div>
 
                 <div className="upper-section">
                     <h3>Upper</h3>
                     <select
+                        className="upper-options"
                         value={upper}
                         onChange={(e) => setUpper(e.target.value)}
                     >{options}</select>    
                 </div>
                 <br />
 
-                <button className="get-cleats-button" onClick={getCleatsHandler}>Get Cleats</button>
-                <br />
-                <button className="reset-values-button" onClick={resetValuesHandler}>Reset Values</button>
-                <br />
-                <button className="reset-results-button" onClick={() => setResult([])}>Reset Results</button>
+                <div className="reset-container">
+                    <span className="reset-button" onClick={resetValuesHandler}>Reset Values</span>
+                    <span className="reset-button" onClick={() => setResult([])}>Reset Results</span>
+                </div>
+                <div className="get-container">
+                    <div className="get-cleats-button" onClick={getCleatsHandler}>Get Cleats!</div>
+                </div>
             </div>
 
             <div className='results-section'>

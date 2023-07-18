@@ -1,65 +1,74 @@
-.get-cleats-button {
-    padding: 30px;
-    background-color: red;
-    color: white;
-    font-size: 24px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid black;
-    cursor: pointer;
-    
-}
-
-.reset-values-button {
-    margin-top: 20px;
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    border: 1px solid red;
-    padding: 15px;
-}
-.reset-results-button {
-    margin-top: 20px;
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    border: 1px solid red;
-    padding: 15px;
-}
-
 .chooser-container {
     margin: auto;
     width: 70%;
-}
 
-.aspects-section {
-    float: left;
-}
+    .aspects-container {
+        float: left;
+        text-align: left;
+        width: 30%;
 
-.results-section {
-    float: right;
-}
+        .upper-options {
+            font-size: 25px;
+            width: 100%;
+        }
 
-.cleat-item {
-    padding: 30px 50px 50px 50px;
-    text-align: left;
-    border: 1px solid gray;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    /* clear: both; */
-}
+        .get-container {
+            width: 100%;
 
-.cleat-item-vals {
-    /* float: right; */
-    /* justify-content: left; */
-}
+            .get-cleats-button {
+                margin: auto;
+                width: 80%;
+                left: 50%;
+                text-align: center;
+                justify-content: center;
+                padding: 5px;
+                background-color: blue;
+                color: white;
+                font-size: 28px;
+                margin-top: 40px;
+                border-radius: 25px;
+                border: 1px solid black; 
+                cursor: pointer;
+            }
+        }
 
-.cleat-label {
-    display: inline-block;
-    padding-left: 20px;
-    font-size: 18pt;
-}
+        .reset-container {
+            margin-top: 20px;
 
-.cleat-image {
-    float: left;
+            .reset-button {
+                justify-content: center;
+                width: 25%;
+                margin: 20px 20px 10px 10px;
+                color: blue;
+                background-color: white;
+                border-radius: 20px;
+                border: 1px solid blue;
+                padding: 10px;
+            }
+        }
+
+    }
+
+    .results-section {
+        float: right;
+
+        .cleat-item {
+            padding: 30px 50px 50px 50px;
+            text-align: left;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cleat-label {
+            display: inline-block;
+            padding-left: 20px;
+            font-size: 18pt;
+        }
+
+        .cleat-image {
+            float: left;
+        }
+    }
+
 }
