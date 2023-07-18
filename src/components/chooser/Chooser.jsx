@@ -64,7 +64,6 @@ const Chooser = () => {
                         min={1}
                         max={5}
                     />
-
                 </div>
                 <div className="comfort-section">
                     <h3>Comfort (1-5)</h3>
@@ -121,24 +120,22 @@ const Chooser = () => {
                     <div className='result-cleats'>
                         <h1>Results:</h1>
                         <br />
-                        {result.map((boot) => {
-                            return (
-                                <Link to={`/cleat/${boot.cleatName}`}>
-                                    <div className="cleat-item">
-                                        {boot.imageUrl &&
-                                            <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
-                                        }
-                                        <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
-                                        {/* <div className="val-container">
-                                            <p className="cleat-item-vals">Width: {boot.width}</p>
-                                            <p className="cleat-item-vals">Comfort: {boot.comfort}</p>
-                                            <p className="cleat-item-vals">Lockdown: {boot.lockdown}</p>
-                                            <p className="cleat-item-vals">Upper: {boot.upper}</p>
-                                        </div> */}
-                                    </div>
-                                </Link>
-                            )
-                        })}
+                        {result.length === 0 && 
+                            <div>Sorry, no results</div>
+                        }
+                        {result.length > 0 && 
+                            result.map((boot) => {
+                                return (
+                                    <Link to={`/cleat/${boot.cleatName}`}>
+                                        <div className="cleat-item">
+                                            {boot.imageUrl &&
+                                                <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
+                                            }
+                                            <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
                     </div>
                 }
             </div>
