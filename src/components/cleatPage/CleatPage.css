@@ -1,0 +1,36 @@
+.back-button {
+    position: absolute;
+    margin-left: 25px;
+    padding: 5px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    color: blue;
+}
+
+.cleat-section {
+    border: 1.5px solid black;
+    border-radius: 6px;
+    width: 60%;
+    margin: auto;
+    padding-bottom: 30px;
+    background-color: #Eef1f1;
+
+    .cleat-specs {
+        width: 20%;
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 0 5px 0 5px;
+        float: right;
+        justify-content: left;
+        margin-right: 80px;
+        margin-left: -20px;
+        height: 280px;
+        background-color: white;
+    }
+    
+    p {
+        display: flex;
+        font-size: large;
+    }
+}
+

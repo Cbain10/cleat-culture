@@ -1,0 +1,15 @@
+.button-container {
+    padding-top: 50px;
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+}
+
+.divider {
+    width: 50px;
+}
+
+.recommend-header {
+    justify-content: center;
+}

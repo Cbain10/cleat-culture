@@ -1,0 +1,14 @@
+.lookup-cleat-button {
+    background-color: red;
+    display: flex;
+    color: white;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 500px;
+    font-family: 'Marker Felt', 'fantasy';
+    font-size: 30pt;
+    border: white;
+    border-radius: 7px;
+}
