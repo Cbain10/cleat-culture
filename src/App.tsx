@@ -5,6 +5,8 @@ import CleatPage from './views/cleatPage/CleatPage';
 import ErrorPage from './views/errorPage/ErrorPage';
 import CleatTable from './views/cleatArchive/CleatArchive';
 import Chooser from './views/chooser/Chooser';
+import { SoccerView } from './views/soccerView/SoccerView';
+import { GamesView } from './views/gamesView/GamesView';
 
 function App() {
   return (
@@ -12,9 +14,11 @@ function App() {
       <div className="App">
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/cleat-table' element={<CleatTable />} />
-          <Route path='/cleat/:id' element={<CleatPage />} />
-          <Route path='/chooser' element={<Chooser />} />
+          <Route path='/soccer' element={<SoccerView />} />
+          <Route path='/soccer/cleat-table' element={<CleatTable />} />
+          <Route path='/soccer/cleat/:id' element={<CleatPage />} />
+          <Route path='/soccer/chooser' element={<Chooser />} />
+          <Route path='/games' element={<GamesView />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </div>

@@ -1,20 +1,21 @@
 import { Link } from 'react-router-dom';
 import { GenericButton } from '../../components/buttons/generic-button/GenericButton';
-import TableChartIcon from '@mui/icons-material/TableChart';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+// import TableChartIcon from '@mui/icons-material/TableChart';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import './Home.css';
 
 const Home = () => {
     return (
         <div className="buttons-container">
-            <Link to={`/cleat-table`}>
+            <Link to={`/soccer`}>
                 <GenericButton>
-                    <TableChartIcon fontSize='large' />
+                    <SportsSoccerIcon fontSize='large' />
                 </GenericButton>
             </Link>
-            <Link to={`/chooser`}>
+            <Link to={`/games`}>
                 <GenericButton>
-                    <ManageSearchIcon fontSize='large' />
+                    <VideogameAssetIcon fontSize='large' />
                 </GenericButton>
             </Link>
         </div>
