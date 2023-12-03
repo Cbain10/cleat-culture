@@ -1,9 +1,9 @@
 import Axios from 'axios';
 
-async function getCleatsByValue(width, comfort, lockdown, upper) {
+async function getCleatsByValue(width: number, comfort: number, lockdown: number, upper: string) {
     // TODO store urls somewhere better
     const url = 'https://kkmt2wfxlk.execute-api.us-east-2.amazonaws.com/dev';
-    let raw = {
+    const raw = {
         width: width,
         comfort: comfort,
         lockdown: lockdown,
@@ -19,9 +19,9 @@ async function getAllCleats() {
     return result.data.body;
 }
 
-async function getCleatByName(name) {
+async function getCleatByName(name: string) {
     const url = 'https://kkmt2wfxlk.execute-api.us-east-2.amazonaws.com/dev/name';
-    let params = {
+    const params = {
         cleatName: name
     };
     const result = await Axios.post(url, params);

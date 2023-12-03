@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import './Modal.css';
+import { Cleat } from "../../types/types";
 
-const Modal = ({ handleClose, handleSumbit }) => {
+export type ModalProps = {
+    handleClose: () => void;
+    handleSumbit?: (newCleat: Cleat) => void;
+}
+
+const Modal: FC<ModalProps> = ({ handleClose }) => {
 
     const [name, setName] = useState('');
     const [brand, setBrand] = useState('');
@@ -17,17 +23,17 @@ const Modal = ({ handleClose, handleSumbit }) => {
         url !== ''
     )
 
-    const onSubmit = () => {
-        const newCleat = {
-            "name": name,
-            "brand": brand,
-            "year": year,
-            "rating": rating,
-            "photo": url,
-        };
-        clearData();
-        handleSumbit(newCleat);
-    }
+    // const onSubmit = () => {
+    //     const newCleat = {
+    //         "name": name,
+    //         "brand": brand,
+    //         "year": year,
+    //         "rating": rating,
+    //         "photo": url,
+    //     };
+    //     clearData();
+    //     handleSumbit(newCleat);
+    // }
     
     const onClose = () => {
         clearData();
@@ -90,7 +96,8 @@ const Modal = ({ handleClose, handleSumbit }) => {
                     className="delete-btn btn"
                     type="button"
                     disabled={disabled}
-                    onClick={onSubmit} >
+                    // onClick={onSubmit} 
+                >
                         Submit
                 </button>
                 <button className="btn" type="button" onClick={onClose}>

@@ -1,7 +1,14 @@
-import React from "react";
+import { FC } from 'react';
 import './cleat-review.css';
 
-const CleatReview = ({ review }) => {
+export type CleatReviewProps = {
+    review: {
+        comments: string[];
+        userRating: number;
+    }
+}
+
+const CleatReview: FC<CleatReviewProps> = ({ review }) => {
 
     return (
         <div className="review-section">

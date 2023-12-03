@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
+import { useState } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { Link } from "react-router-dom";
 import './Chooser.css';
 import { Slider } from "@mui/material";
+import { dynamoCleatService } from "../../services/serverless/DynamoCleatService";
+import { Cleat } from "../../types/types";
 
 const Chooser = () => {
 
-    const [width, setWidth] = useState(3);
-    const [comfort, setComfort] = useState(3);
-    const [lockdown, setLockdown] = useState(3);
-    const [upper, setUpper] = useState('any');
-    const [result, setResult] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [width, setWidth] = useState<number>(3);
+    const [comfort, setComfort] = useState<number>(3);
+    const [lockdown, setLockdown] = useState<number>(3);
+    const [upper, setUpper] = useState<string>('any');
+    const [result, setResult] = useState<Cleat[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const uppers = [
         {value: 'knitted', text: "Knitted"},
@@ -58,7 +59,7 @@ const Chooser = () => {
                     <h3>Width (1-5)</h3>
                     <Slider
                         value={width}
-                        onChange={width => setWidth(width.target.value)}
+                        // onChange={width => setWidth(width.target.value)}
                         step={1}
                         marks={marks}
                         min={1}
@@ -69,7 +70,7 @@ const Chooser = () => {
                     <h3>Comfort (1-5)</h3>
                     <Slider
                         value={comfort}
-                        onChange={e => setComfort(e.target.value)}
+                        // onChange={e => setComfort(e.target.value)}
                         step={1}
                         marks={marks}
                         min={1}
@@ -80,7 +81,7 @@ const Chooser = () => {
                     <h3>Lockdown (1-5)</h3>
                     <Slider
                         value={lockdown}
-                        onChange={e => setLockdown(e.target.value)}
+                        // onChange={e => setLockdown(e.target.value)}
                         step={1}
                         marks={marks}
                         min={1}

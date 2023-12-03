@@ -1,8 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
 import './BackButton.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const BackButton = ({ buttonText }) => {
+export type BackButtonProps = {
+    buttonText: string
+}
+
+const BackButton: FC<BackButtonProps> = ({ buttonText }) => {
     return (
         <div className='back-button'>
             <ArrowBackIcon className='arrow-icon'/>

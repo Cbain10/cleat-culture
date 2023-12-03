@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "../addCleatModal/Modal";
 import './CleatTable.css';
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { dynamoCleatService } from "../../services/serverless/DynamoCleatService";
 import ClipLoader from 'react-spinners/ClipLoader';
+import { dynamoCleatService } from "../../services/serverless/DynamoCleatService";
+import { Cleat } from "../../types/types";
 
 const CleatTable = () => {
 
-    const [data, setData] = useState([]);
-    const [showAddCleatModal, setShowAddCleatModal] = useState(false);
-    const [ascending, setAscending] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<Cleat[]>([]);
+    const [showAddCleatModal, setShowAddCleatModal] = useState<boolean>(false);
+    const [ascending, setAscending] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         dynamoCleatService.getAllCleats()
@@ -23,13 +24,13 @@ const CleatTable = () => {
 
     // SORTING -----------------------------------------------
     const sortCleats = () => {
-        let newData = [...data];
+        const newData = [...data];
         if (!ascending) {
-            newData.sort((a,b) => {
+            newData.sort((a: Cleat, b: Cleat) => {
                 return a.cleatName > b.cleatName ? 1 : -1;
             });
         } else {
-            newData.sort((a,b) => {
+            newData.sort((a: Cleat, b: Cleat) => {
                 return a.cleatName < b.cleatName ? 1 : -1;
             });
         }
@@ -37,16 +38,16 @@ const CleatTable = () => {
         setData(newData);
     }
     const sortByBrand = () => {
-        let newData = [...data];
+        const newData = [...data];
         if (!ascending) {
-            newData.sort((a,b) => {
+            newData.sort((a: Cleat, b: Cleat) => {
                 if (a.brand === b.brand) {
                     return a.cleatName > b.cleatName ? 1 : -1;
                 }
                 return a.brand > b.brand ? 1 : -1;
             });
         } else {
-            newData.sort((a,b) => {
+            newData.sort((a: Cleat, b: Cleat) => {
                 if (a.brand === b.brand) {
                     return a.cleatName > b.cleatName ? 1 : -1;
                 }
@@ -82,7 +83,7 @@ const CleatTable = () => {
                                 <th>Lockdown</th>
                                 <th>Upper</th>
                             </tr>
-                            {data.map((cleat, key) => {
+                            {data.map((cleat: Cleat, key) => {
                                 return (
                                     <tr className={`item-row ${key % 2 === 0 ? "dark" : "light"}`} key={key}>
                                         <td className="image-col">
@@ -114,7 +115,7 @@ const CleatTable = () => {
                     {showAddCleatModal && <Modal
                         handleClose={() => setShowAddCleatModal(false)}
                         // handleSumbit={onAddCleatSumbit}
-                        show={showAddCleatModal}
+                        // show={showAddCleatModal}
                     />}
                 </div>
             }
