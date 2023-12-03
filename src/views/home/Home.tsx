@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { GenericButton } from '../../components/buttons/generic-button/GenericButton';
-// import TableChartIcon from '@mui/icons-material/TableChart';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import './Home.css';

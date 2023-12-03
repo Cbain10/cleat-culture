@@ -4,6 +4,7 @@ import './CleatPage.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
 import { Cleat } from '../../types/types';
+import { Nav } from '../../components/nav/Nav';
 
 const CleatPage = () => {
 
@@ -28,6 +29,7 @@ const CleatPage = () => {
 
     return (
         <>
+            <Nav />
             {loading &&
                 <ClipLoader
                     color={'red'}
