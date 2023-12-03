@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import './CleatPage.css';
 import ClipLoader from 'react-spinners/ClipLoader';
-import BackButton from '../buttons/back-button/BackButton';
 import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
 import { Cleat } from '../../types/types';
 
@@ -40,7 +39,7 @@ const CleatPage = () => {
             {!loading &&
                 <>
                     <Link to={`/chooser`}>
-                        <BackButton buttonText={'Back to results'} />
+                        {/* <BackButton buttonText={'Back to results'} /> */}
                     </Link>
                     {cleat && 
                         <div className="cleat-section">

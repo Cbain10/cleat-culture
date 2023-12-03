@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './views/home/Home';
-import CleatPage from './components/cleatPage/CleatPage';
+import CleatPage from './views/cleatPage/CleatPage';
 import ErrorPage from './views/errorPage/ErrorPage';
-import CleatTable from './components/cleatTable/CleatTable';
-import Chooser from './components/chooser/Chooser';
+import CleatTable from './views/cleatArchive/CleatArchive';
+import Chooser from './views/chooser/Chooser';
 
 function App() {
   return (
