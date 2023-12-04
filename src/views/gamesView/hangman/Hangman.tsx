@@ -105,40 +105,38 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
     return (
         <>
             <Nav />
-            <h1>HANGMAN</h1>
-            <div className='lives-section'>
-                {lives > 0
-                    ? livesSection()
-                    : <h1>GAME OVER: {word}</h1>
-                }
+            <div className='hangman-container'>
+                <h1 className='hangman-title'>HANGMAN</h1>
+                <div className='lives-section'>
+                    {lives > 0
+                        ? livesSection()
+                        : <h1>GAME OVER: {word}</h1>
+                    }
+                </div>
+                <div className="correct-letters">
+                    {resultSection()}
+                </div>
+                <div className="guesser">
+                    <form className='guesser'>
+                        <input
+                            className='input-field'
+                            type='text'
+                            value={guess}
+                            onChange={(e) => setGuess(e.target.value)}
+                            onKeyDown={handleEnter}
+                        />
+                    </form>
+                    <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
+                </div>
+                <div className="guessed-letters">
+                    <h3>Guessed Letters:</h3>
+                </div>
+                <div className='letters'>
+                    {guessedLetters.map((letter) => {
+                        return <div className="chars" key={letter}>{letter}</div>
+                    })}
+                </div>
             </div>
-            <div className="correct-letters">
-                {resultSection()}
-            </div>
-            <div className="guesser">
-                <form className='guesser'>
-                    <input
-                        className='input-field'
-                        type='text'
-                        value={guess}
-                        onChange={(e) => setGuess(e.target.value)}
-                        onKeyDown={handleEnter}
-                    />
-                </form>
-                <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
-            </div>
-            {guessedLetters.length > 0 &&
-                <>
-                    <div className="guessed-letters">
-                        <h3>Guessed Letters:</h3>
-                    </div>
-                    <div className='letters'>
-                        {guessedLetters.map((letter) => {
-                            return <div className="chars" key={letter}>{letter}</div>
-                        })}
-                    </div>
-                </>
-            }
         </>
     )
 }
