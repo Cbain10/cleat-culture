@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './views/home/Home';
-import CleatPage from './views/cleatPage/CleatPage';
+import CleatPage from './views/soccerView/cleatPage/CleatPage';
 import ErrorPage from './views/errorPage/ErrorPage';
-import CleatTable from './views/cleatArchive/CleatArchive';
-import Chooser from './views/chooser/Chooser';
+import CleatTable from './views/soccerView/cleatArchive/CleatArchive';
+import Chooser from './views/soccerView/chooser/Chooser';
 import { SoccerView } from './views/soccerView/SoccerView';
 import { GamesView } from './views/gamesView/GamesView';
 

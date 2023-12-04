@@ -23,3 +23,27 @@ export const SoccerView = () => {
         </>
     )
 }
+
+/*
+    Soccer
+        Cleats - serverless backend
+        Personal? (resume, highlights)
+        Training content - automated training planner?
+            Check availability for actual training sessions
+            Positional references - forwards -> David Villa clips
+    Service
+    Exercise
+    Barefoot shoes
+    Trivia
+        Seinfeld
+        HP
+        Star Wars
+
+
+
+    Games
+        Hangman
+        Tic Tac Toe
+        Black Jack
+    
+*/

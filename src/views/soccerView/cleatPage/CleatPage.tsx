@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import './CleatPage.css';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { dynamoCleatService } from '../../services/serverless/DynamoCleatService';
-import { Cleat } from '../../types/types';
-import { Nav } from '../../components/nav/Nav';
+import { dynamoCleatService } from '../../../services/serverless/DynamoCleatService';
+import { Cleat } from '../../../types/types';
+import { Nav } from '../../../components/nav/Nav';
 
 const CleatPage = () => {
 
