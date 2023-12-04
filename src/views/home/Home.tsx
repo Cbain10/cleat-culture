@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className="buttons-container">
             <Link to={`/soccer`}>
-                <GenericButton>
+                <GenericButton label='Soccer'>
                     <SportsSoccerIcon fontSize='large' />
                 </GenericButton>
             </Link>

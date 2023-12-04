@@ -5,10 +5,11 @@ type GenericButtonProps = {
     onClick?: () => void;
     width?: number;
     height?: number;
+    label?: string;
     children?: ReactElement;
 }
 
-export const GenericButton: FC<GenericButtonProps> = ({ onClick, width = 100, height = 80, children }) => {
+export const GenericButton: FC<GenericButtonProps> = ({ onClick, width = 100, height = 80, label, children }) => {
 
     return (
         <div
@@ -17,6 +18,9 @@ export const GenericButton: FC<GenericButtonProps> = ({ onClick, width = 100, he
             style={{ width: `${width}px`, height: `${height}px` }}
         >
             {children}
+            <div className="btn-label">
+                {label}
+            </div>
         </div>
     )
 }
