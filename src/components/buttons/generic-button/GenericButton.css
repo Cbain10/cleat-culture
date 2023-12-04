@@ -4,6 +4,7 @@
     width: 100px;
     height: 80px;
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -17,13 +18,12 @@
 .generic-button:hover {
     box-shadow: 0 0 20px #646cffaa;
     scale: 1.1;
-    /* height: 100px; */
     transition: all 0.25s ease;
 }
 
 .generic-button:hover .btn-label {
     position: absolute;
-    bottom: 85px;
+    bottom: 90px;
     display: inline;
-    transition: all 1s ease;
+    transition: 1s ease;
 }

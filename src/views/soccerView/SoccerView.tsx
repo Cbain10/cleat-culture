@@ -9,13 +9,13 @@ export const SoccerView = () => {
         <>
             <Nav />
             <div className="buttons-container">
-                <Link to={`/soccer/cleat-table`}>
-                    <GenericButton>
+                <Link to={`/soccer/archive`}>
+                    <GenericButton label="Archive">
                         <TableChartIcon fontSize='large' />
                     </GenericButton>
                 </Link>
-                <Link to={`/soccer/chooser`}>
-                    <GenericButton>
+                <Link to={`/soccer/recommender`}>
+                    <GenericButton label="Recommender">
                         <ManageSearchIcon fontSize='large' />
                     </GenericButton>
                 </Link>

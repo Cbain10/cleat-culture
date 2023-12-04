@@ -15,9 +15,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/soccer' element={<SoccerView />} />
-          <Route path='/soccer/cleat-table' element={<CleatTable />} />
+          <Route path='/soccer/archive' element={<CleatTable />} />
           <Route path='/soccer/cleat/:id' element={<CleatPage />} />
-          <Route path='/soccer/chooser' element={<Chooser />} />
+          <Route path='/soccer/recommender' element={<Chooser />} />
           <Route path='/games' element={<GamesView />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>

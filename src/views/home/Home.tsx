@@ -13,7 +13,7 @@ const Home = () => {
                 </GenericButton>
             </Link>
             <Link to={`/games`}>
-                <GenericButton>
+                <GenericButton label='Games'>
                     <VideogameAssetIcon fontSize='large' />
                 </GenericButton>
             </Link>
