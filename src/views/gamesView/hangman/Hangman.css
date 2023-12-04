@@ -1,0 +1,66 @@
+h1 {
+    justify-content: center;
+    display: flex;
+    text-align: center;
+}
+
+.lives-section {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.life-icon {
+    padding: 0px 12px;
+}
+
+.line-icon {
+    padding: 12px 5px 0px 5px;
+}
+
+.correct-letters {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 30px;
+
+    .correct-letter {
+        font-size: 30pt;
+        padding: 0 5px 13px 5px;
+    }
+}
+
+.guesser {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+   
+    .input-field {
+        font-size: 25pt;
+        width: 60px;
+        text-align: center;
+    }
+
+    .submit-guess-btn {
+        margin-left: 10px;
+        width: 100px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid white;
+        font-size: 20pt;
+    }
+    .submit-guess-btn:disabled {
+        background-color: grey;
+    }
+}
+
+
+.guessed-letters, .letters {
+    display: flex;
+    justify-content: center;
+
+    .chars {
+        font-size: 20pt;
+        padding-left: 3px;
+    }
+}

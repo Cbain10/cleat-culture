@@ -14,8 +14,8 @@ export const GamesView = () => {
             <Nav />
             <div className="outer-container">
                 <div style={{ display: 'flex' }}>
-                    <Link to={`/error`}>
-                        <GenericButton>
+                    <Link to={`/games/hangman`}>
+                        <GenericButton label="Hangman">
                             <ExtensionIcon fontSize='large' />
                         </GenericButton>
                     </Link>

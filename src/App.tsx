@@ -7,6 +7,7 @@ import CleatTable from './views/soccerView/cleatArchive/CleatArchive';
 import Chooser from './views/soccerView/chooser/Chooser';
 import { SoccerView } from './views/soccerView/SoccerView';
 import { GamesView } from './views/gamesView/GamesView';
+import { Hangman } from './views/gamesView/hangman/Hangman';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/soccer/cleat/:id' element={<CleatPage />} />
           <Route path='/soccer/recommender' element={<Chooser />} />
           <Route path='/games' element={<GamesView />} />
+          <Route path='/games/hangman' element={<Hangman />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </div>
