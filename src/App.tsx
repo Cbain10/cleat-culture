@@ -8,6 +8,7 @@ import Chooser from './views/soccerView/chooser/Chooser';
 import { SoccerView } from './views/soccerView/SoccerView';
 import { GamesView } from './views/gamesView/GamesView';
 import { Hangman } from './views/gamesView/hangman/Hangman';
+import { TerminalView } from './views/terminalView/TerminalView';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/soccer/archive' element={<CleatTable />} />
           <Route path='/soccer/cleat/:id' element={<CleatPage />} />
           <Route path='/soccer/recommender' element={<Chooser />} />
+          <Route path='/terminal' element={<TerminalView />} />
           <Route path='/games' element={<GamesView />} />
           <Route path='/games/hangman' element={<Hangman />} />
           <Route path='*' element={<ErrorPage />} />

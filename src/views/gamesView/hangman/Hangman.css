@@ -35,5 +35,9 @@
         height: 10vh;
         border: 1px solid #646cffaa;
         border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18pt;
     }
 }
