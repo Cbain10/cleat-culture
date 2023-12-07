@@ -1,0 +1,25 @@
+input:focus {outline:none!important;}
+
+
+
+.terminal-container {
+    width: 100vw;
+    height: 100vh;
+    color: yellowgreen;
+    font-size: 14pt;
+    font-family: monospace;
+    padding: 8px;
+
+    .text-input {
+        caret-color: yellowgreen;
+        caret-shape: block;
+        border: none;
+        width: 200px;
+        color: yellowgreen;
+        /* height: 30px; */
+        font-size: 14pt;
+        font-family: monospace;
+        /* background: white; */
+        background: inherit;
+    }
+}
