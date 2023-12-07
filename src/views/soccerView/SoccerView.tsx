@@ -25,6 +25,7 @@ export const SoccerView = () => {
 }
 
 /*
+
     Soccer
         Cleats - serverless backend
         Personal? (resume, highlights)
@@ -39,9 +40,8 @@ export const SoccerView = () => {
         HP
         Star Wars
 
-
-
     Games
+        DB for stats - leaderboard on some sort of game
         Hangman
         Tic Tac Toe
         Black Jack
