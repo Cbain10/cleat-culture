@@ -59,6 +59,12 @@ export const TerminalView = () => {
             setTimeout(() => {
                 location.href = `http://localhost:5173${path}`;
             }, 1000);
+        } else if (command === 'pwd') {
+            const newText = [userInfo.concat(command), `printing working directory...`];
+            setDisplayText(displayText.concat(newText));
+            setTimeout(() => {
+                window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0');
+            }, 1000)
         } else {
             const newText = [ userInfo.concat(command), `${command}: command not found`]
             setDisplayText(displayText.concat(newText));
@@ -81,6 +87,7 @@ export const TerminalView = () => {
                     value={command}
                     onChange={(e) => setCommand(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") handleEnterCommand(); }}
+                    onBlur={e => e.target.focus()}
                 />
             </div>
         </div>
@@ -88,10 +95,8 @@ export const TerminalView = () => {
 }
 
 /*
-
     to implement
-        pwd - rick roll
-        banner - also printing at beginning
-
-
+        base URL for location.href (go)
+        cd ../
+        styling for all responses
 */

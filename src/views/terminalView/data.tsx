@@ -2,33 +2,33 @@ import { TCommand, TFile } from "./types";
 
 export const availableCommands: TCommand[] = [
     {
-        command: 'help',
-        description: 'show all available commands'
+        command: 'banner',
+        description: 'print the banner'
     },
     {
         command: 'cd',
         description: 'change directory'
     },
     {
-        command: 'ls',
-        description: 'list files'
+        command: 'clear',
+        description: 'clear the terminal'
     },
     {
         command: 'go',
         description: 'navigate to GUI version of path'
     },
     {
-        command: 'banner',
-        description: 'print the banner'
+        command: 'help',
+        description: 'show all available commands'
+    },
+    {
+        command: 'ls',
+        description: 'list files'
     },
     {
         command: 'pwd',
         description: 'print working directory'
     },
-    {
-        command: 'clear',
-        description: 'clear the terminal'
-    }
 ];
 
 export const fileStructure: TFile = {
