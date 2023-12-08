@@ -31,59 +31,56 @@ export const availableCommands: TCommand[] = [
     }
 ];
 
-/*
-    home
-        soccer
-            cleats
-                archive
-                recommender
-            content
-        games
-            hangman
-*/
-
 export const fileStructure: TFile = {
-    name: 'home',
-    path: '/',
-    children: [
-        {
-            name: 'soccer',
-            path: '/soccer',
-            children: [
-                {
-                    name: 'cleats',
-                    path: '/soccer/cleats',
-                    children: [
-                        {
-                            name: 'archive',
-                            path: '/soccer/cleats/archive',
-                            children: []
-                        },
-                        {
-                            name: 'recommender',
-                            path: 'soccer/cleats/recommender',
-                            children: []
+    home: {
+        name: 'home',
+        path: '/',
+        children: {
+            soccer: {
+                name: 'soccer',
+                path: '/soccer',
+                children: {
+                    cleats: {
+                        name: 'cleats',
+                        path: '/soccer/cleats',
+                        children: {
+                            archive: {
+                                name: 'archive',
+                                path: '/soccer/cleats/archive',
+                            },
+                            recommender: {
+                                name: 'recommender',
+                                path: 'soccer/cleats/recommender',
+                            }
                         }
-                    ]
-                },
-                {
-                    name: 'content',
-                    path: '/soccer/content',
-                    children: []
+                    },
+                    content: {
+                        name: 'content',
+                        path: '/soccer/content',
+                    }
                 }
-            ]
-        },
-        {
-            name: 'games',
-            path: '/games',
-            children: [
-                {
-                    name: 'hangman',
-                    path: '/games/hangman',
-                    children: []
+            },
+            games: {
+                name: 'games',
+                path: '/games',
+                children: {
+                    hangman: {
+                        name: 'hangman',
+                        path: '/games/hangman',
+                    }
+                    // TODO ADD MORE GAMES
                 }
-                // TODO ADD MORE GAMES
-            ]
+            },
         }
-    ]
+    }
 }
+
+export const bannerArt = String.raw`
+ ______     ______     ______     __     __   __    
+/\  ___\   /\  == \   /\  __ \   /\ \   /\ "-.\ \   
+\ \ \____  \ \  __/   \ \  __ \  \ \ \  \ \ \-.  \  
+ \ \_____\  \ \_____\  \ \_\ \_\  \ \_\  \ \_\\"\_\ 
+  \/_____/   \/_____/   \/_/\/_/   \/_/   \/_/ \/_/ 
+
+enter 'help' to see list of availabled commands
+`

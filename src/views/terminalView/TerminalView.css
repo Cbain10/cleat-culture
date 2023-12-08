@@ -10,6 +10,10 @@ input:focus {outline:none!important;}
     font-family: monospace;
     padding: 8px;
 
+    .ascii {
+        line-height: normal;
+    }
+
     .text-input {
         caret-color: yellowgreen;
         /* caret-shape: block; */

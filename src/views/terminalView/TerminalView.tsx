@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import './TerminalView.css';
-import { availableCommands, fileStructure } from "./data";
+import { availableCommands, bannerArt, fileStructure } from "./data";
 
 const USER = 'visitor@CBain';
 const USER_POSTFIX = ' ~ % ';
@@ -11,37 +11,41 @@ export const TerminalView = () => {
     const [command, setCommand] = useState<string>('');
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [path, setPath] = useState('');
-    const [currentFile, setCurrentFile] = useState(fileStructure);
+    const [currentFile, setCurrentFile] = useState(fileStructure.home);
+    // const [testHTML, setTestHTML] = useState<HTMLElement[]>([]);
 
     const userInfo = useMemo(() => {
         return USER.concat(path).concat(USER_POSTFIX);
     }, [path]);
 
     const handleEnterCommand = () => {
-        if (command === 'clear') {
+        if (command === 'banner') {
+            // Add banner
+        } else if (command === 'clear') {
             setDisplayText([]);
         } else if (command === 'help') {
             const commandArray: string[] = availableCommands.map((command => `${command.command} - ${command.description}`));
             commandArray.unshift(userInfo.concat(command));
             setDisplayText(prev => prev.concat(commandArray));
         } else if (command === 'ls') {
-            let childrenArray = currentFile.children.map(child => child.name);
-            childrenArray.unshift(userInfo.concat(command));
+            // let childrenArray = currentFile.children.map(child => child.name);
+            let arr = Object.keys(currentFile.children);
+            arr.unshift(userInfo.concat(command));
             // display the string
-            setDisplayText(displayText.concat(childrenArray));
+            setDisplayText(displayText.concat(arr));
         } else if (command.substring(0,2) === 'cd') {
-            const dir = command.slice(3, command.length);
-            console.log(dir);
-            const file = currentFile.children.find(child => child.name === dir)
-            if (file) {
+            const dir: string = command.slice(3, command.length);
+            if (dir in currentFile.children) {
+                const file = currentFile.children[dir];
                 const newPath = path.concat(`/${dir}`)
                 setPath(newPath);
                 setCurrentFile(file);
                 setDisplayText([...displayText, userInfo.concat(command)]);
             } else {
+                // cd ../ go back up a folder 
                 // also add command
-                const response = `${dir}: folder does not exist...`;
-                setDisplayText([...displayText, response])
+                const newText = [ USER.concat(path).concat(USER_POSTFIX).concat(command), `${dir}: folder does not exist`]
+                setDisplayText(displayText.concat(newText));
             }
         } else if (command === 'go') {
             // display message leaving for path
@@ -61,6 +65,7 @@ export const TerminalView = () => {
 
     return (
         <div className="terminal-container">
+            <pre className="ascii">{bannerArt}</pre>
             {displayText.map((line, index) => {
                 return <div key={index}>{line}</div>
             })}
@@ -78,3 +83,12 @@ export const TerminalView = () => {
         </div>
     )
 }
+
+/*
+
+    to implement
+        pwd - rick roll
+        banner - also printing at beginning
+
+
+*/
