@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import './TerminalView.css';
 import { availableCommands, fileStructure } from "./data";
 
-const USER = 'visitor@CBain ~ % ';
+const USER = 'visitor@CBain';
+const USER_POSTFIX = ' ~ % ';
 
 export const TerminalView = () => {
 
@@ -12,16 +13,20 @@ export const TerminalView = () => {
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure);
 
+    const userInfo = useMemo(() => {
+        return USER.concat(path).concat(USER_POSTFIX);
+    }, [path]);
+
     const handleEnterCommand = () => {
         if (command === 'clear') {
             setDisplayText([]);
         } else if (command === 'help') {
             const commandArray: string[] = availableCommands.map((command => `${command.command} - ${command.description}`));
-            commandArray.unshift(USER.concat(command));
+            commandArray.unshift(userInfo.concat(command));
             setDisplayText(prev => prev.concat(commandArray));
         } else if (command === 'ls') {
             let childrenArray = currentFile.children.map(child => child.name);
-            childrenArray.unshift(USER.concat(command));
+            childrenArray.unshift(userInfo.concat(command));
             // display the string
             setDisplayText(displayText.concat(childrenArray));
         } else if (command.substring(0,2) === 'cd') {
@@ -32,9 +37,9 @@ export const TerminalView = () => {
                 const newPath = path.concat(`/${dir}`)
                 setPath(newPath);
                 setCurrentFile(file);
-                // const result = USER.concat(newPath);
-                setDisplayText([...displayText, USER.concat(command)]);
+                setDisplayText([...displayText, userInfo.concat(command)]);
             } else {
+                // also add command
                 const response = `${dir}: folder does not exist...`;
                 setDisplayText([...displayText, response])
             }
@@ -44,7 +49,7 @@ export const TerminalView = () => {
             // timeout
             location.href = `http://localhost:5173${path}`;
         } else {
-            setDisplayText(prev => [...prev, USER.concat(command)]);
+            setDisplayText(prev => [...prev, userInfo.concat(command)]);
         }
         setCommandHistory([...commandHistory, command]);
         setCommand('');
@@ -56,7 +61,7 @@ export const TerminalView = () => {
                 return <div key={index}>{line}</div>
             })}
             <div>
-                {USER}
+                {userInfo}
                 <input
                     className="text-input"
                     type="text"
