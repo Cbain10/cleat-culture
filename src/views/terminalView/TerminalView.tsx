@@ -44,12 +44,16 @@ export const TerminalView = () => {
                 setDisplayText([...displayText, response])
             }
         } else if (command === 'go') {
-            // get prefix, add path
             // display message leaving for path
-            // timeout
-            location.href = `http://localhost:5173${path}`;
+            const navPath = path === ' ' ? '/' : path;
+            const newText = [userInfo.concat(command), `navigation to ${navPath}...`];
+            setDisplayText(displayText.concat(newText));
+            setTimeout(() => {
+                location.href = `http://localhost:5173${path}`;
+            }, 1000);
         } else {
-            setDisplayText(prev => [...prev, userInfo.concat(command)]);
+            const newText = [ userInfo.concat(command), `${command}: command not found`]
+            setDisplayText(displayText.concat(newText));
         }
         setCommandHistory([...commandHistory, command]);
         setCommand('');
