@@ -47,16 +47,15 @@ export const TerminalView = () => {
                 setDisplayText([...displayText, userInfo.concat(command)]);
             } else {
                 // cd ../ go back up a folder 
-                // also add command
                 const newText = [ USER.concat(path).concat(USER_POSTFIX).concat(command), `${dir}: folder does not exist`]
                 setDisplayText(displayText.concat(newText));
             }
         } else if (command === 'go') {
-            // display message leaving for path
             const navPath = path === ' ' ? '/' : path;
             const newText = [userInfo.concat(command), `navigation to ${navPath}...`];
             setDisplayText(displayText.concat(newText));
             setTimeout(() => {
+                // TODO get base url
                 location.href = `http://localhost:5173${path}`;
             }, 1000);
         } else if (command === 'pwd') {
