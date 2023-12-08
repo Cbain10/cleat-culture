@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import './TerminalView.css';
 import { availableCommands, bannerArt, fileStructure } from "./data";
 
@@ -7,12 +7,17 @@ const USER_POSTFIX = ' ~ % ';
 
 export const TerminalView = () => {
 
-    const [displayText, setDisplayText] = useState<string[]>([]);
+    const [displayText, setDisplayText] = useState<any[]>([]);
     const [command, setCommand] = useState<string>('');
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure.home);
-    // const [testHTML, setTestHTML] = useState<HTMLElement[]>([]);
+
+    useEffect(() => {
+        const arr: any[] = [];
+        arr.push(<pre className="ascii">{bannerArt}</pre>);
+        setDisplayText(arr);
+    }, []);
 
     const userInfo = useMemo(() => {
         return USER.concat(path).concat(USER_POSTFIX);
@@ -20,7 +25,8 @@ export const TerminalView = () => {
 
     const handleEnterCommand = () => {
         if (command === 'banner') {
-            // Add banner
+            const arr: any[] = [USER.concat(path).concat(USER_POSTFIX).concat(command), (<pre className="ascii">{bannerArt}</pre>)];
+            setDisplayText(displayText.concat(arr));
         } else if (command === 'clear') {
             setDisplayText([]);
         } else if (command === 'help') {
@@ -28,10 +34,8 @@ export const TerminalView = () => {
             commandArray.unshift(userInfo.concat(command));
             setDisplayText(prev => prev.concat(commandArray));
         } else if (command === 'ls') {
-            // let childrenArray = currentFile.children.map(child => child.name);
             let arr = Object.keys(currentFile.children);
             arr.unshift(userInfo.concat(command));
-            // display the string
             setDisplayText(displayText.concat(arr));
         } else if (command.substring(0,2) === 'cd') {
             const dir: string = command.slice(3, command.length);
@@ -65,7 +69,6 @@ export const TerminalView = () => {
 
     return (
         <div className="terminal-container">
-            <pre className="ascii">{bannerArt}</pre>
             {displayText.map((line, index) => {
                 return <div key={index}>{line}</div>
             })}
