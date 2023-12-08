@@ -11,7 +11,6 @@ export const TerminalView = () => {
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure);
-    const files = fileStructure;
 
     const handleEnterCommand = () => {
         if (command === 'clear') {
@@ -25,6 +24,25 @@ export const TerminalView = () => {
             childrenArray.unshift(USER.concat(command));
             // display the string
             setDisplayText(displayText.concat(childrenArray));
+        } else if (command.substring(0,2) === 'cd') {
+            const dir = command.slice(3, command.length);
+            console.log(dir);
+            const file = currentFile.children.find(child => child.name === dir)
+            if (file) {
+                const newPath = path.concat(`/${dir}`)
+                setPath(newPath);
+                setCurrentFile(file);
+                // const result = USER.concat(newPath);
+                setDisplayText([...displayText, USER.concat(command)]);
+            } else {
+                const response = `${dir}: folder does not exist...`;
+                setDisplayText([...displayText, response])
+            }
+        } else if (command === 'go') {
+            // get prefix, add path
+            // display message leaving for path
+            // timeout
+            location.href = `http://localhost:5173${path}`;
         } else {
             setDisplayText(prev => [...prev, USER.concat(command)]);
         }
