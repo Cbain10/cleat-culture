@@ -10,8 +10,10 @@ input:focus {outline:none!important;}
 
     .ascii {
         line-height: normal;
-        color: white;
-        padding-left: 50px;
+        color: rgb(250, 192, 110);
+        padding-left: 30px;
+        margin-bottom: 0px;
+        margin-top: 0px;
     }
 
     .text-input {
@@ -33,7 +35,7 @@ input:focus {outline:none!important;}
 
     .help-command-text {
         display: inline;
-        color: white;
+        color: rgb(250, 192, 110);
         width: 7%;
     }
     .help-description-text {

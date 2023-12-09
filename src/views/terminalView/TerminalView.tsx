@@ -16,7 +16,8 @@ export const TerminalView = () => {
 
     useEffect(() => {
         const arr: any[] = [];
-        arr.push(getBanner(), 'enter \'help\' to see supported commands', <br/>);
+        const helpText = <div style={{ paddingLeft: '30px' }}>enter <span style={{ color: 'rgb(250, 192, 110)'}}>help</span> to see supported commands</div>
+        arr.push(getBanner(), helpText);
         setDisplayText(arr);
     }, []);
 
