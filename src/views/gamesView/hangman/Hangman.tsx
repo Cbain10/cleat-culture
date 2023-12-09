@@ -122,6 +122,7 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                             className='input-field'
                             type='text'
                             value={guess}
+                            autoFocus
                             onChange={(e) => setGuess(e.target.value)}
                             onKeyDown={handleEnter}
                         />

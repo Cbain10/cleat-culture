@@ -77,7 +77,7 @@ export const TerminalView = () => {
             }
         } else if (command === 'go') {
             const navPath = path === ' ' ? '/' : path;
-            const newText = [userInfo.concat(command), `navigation to ${navPath}...`];
+            const newText = [userInfo.concat(command), `navigating to ${navPath}...`];
             setDisplayText(displayText.concat(newText));
             setTimeout(() => {
                 const baseURL = window.location.origin;

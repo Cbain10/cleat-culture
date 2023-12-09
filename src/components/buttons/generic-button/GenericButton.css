@@ -1,6 +1,6 @@
 .generic-button {
     border-radius: 10px;
-    border: 1px solid #646cffaa;
+    border: 1px solid #5fe4fe;
     width: 100px;
     height: 80px;
     display: flex;
@@ -16,7 +16,7 @@
 }
 
 .generic-button:hover {
-    box-shadow: 0 0 20px #646cffaa;
+    box-shadow: 0 0 20px #5fe4fe;
     scale: 1.1;
     transition: all 0.25s ease;
 }
