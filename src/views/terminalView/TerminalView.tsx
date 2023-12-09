@@ -78,7 +78,7 @@ export const TerminalView = () => {
     }
 
     const handleHelpCommand = () => {
-        const output = availableCommands.map((command => <div style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
+        const output = availableCommands.map((command => <div key={command.command} style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
         const tempArr = [userInfo.concat(command), output];
         setDisplayText(prev => prev.concat(tempArr));
     }
@@ -108,7 +108,8 @@ export const TerminalView = () => {
     }
 
     const handleResetCommand = () => {
-        setCommandHistory([...commandHistory, command]);
+        commandHistory.unshift(command);
+        setCommandHistory([...commandHistory]);
         setCommand('');
     }
 
@@ -143,6 +144,31 @@ export const TerminalView = () => {
         handleResetCommand();
     }
 
+    const [offset, setOffset] = useState<number>(0);
+
+    const handleKeyUp = () => {
+        if (offset < commandHistory.length) {
+            const newOffset = offset + 1;
+            setOffset(newOffset);
+            setCommand(commandHistory[newOffset - 1]);
+        }
+    }
+
+    const handleKeyDown = () => {
+        if (offset === 0) {
+            // do nothing
+        }
+        else if (offset === 1) {
+            setCommand('');
+            setOffset(0);
+        }
+        else if (offset > 1) {
+            const newOffset = offset - 1;
+            setOffset(newOffset);
+            setCommand(commandHistory[newOffset - 1]);
+        }
+    }
+
     return (
         <div className="terminal-container">
             {displayText.map((line, index) => {
@@ -156,7 +182,11 @@ export const TerminalView = () => {
                     autoFocus
                     value={command}
                     onChange={(e) => setCommand(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleEnterCommand(); }}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") handleEnterCommand();
+                        else if (e.key === 'ArrowUp') handleKeyUp();
+                        else if (e.key === 'ArrowDown') handleKeyDown();
+                    }}
                     onBlur={e => e.target.focus()}
                 />
             </div>
