@@ -34,19 +34,42 @@ export const TerminalView = () => {
             commandArray.unshift(userInfo.concat(command));
             setDisplayText(prev => prev.concat(commandArray));
         } else if (command === 'ls') {
-            let arr = Object.keys(currentFile.children);
-            arr.unshift(userInfo.concat(command));
-            setDisplayText(displayText.concat(arr));
+            if (currentFile.children) {
+                let arr = Object.keys(currentFile.children);
+                arr.unshift(userInfo.concat(command));
+                setDisplayText(displayText.concat(arr));
+            } else {
+                const newText = [USER.concat(path).concat(USER_POSTFIX).concat(command), 'not a folder'];
+                setDisplayText(displayText.concat(newText));
+            }
         } else if (command.substring(0,2) === 'cd') {
             const dir: string = command.slice(3, command.length);
-            if (dir in currentFile.children) {
+            if (currentFile.children && dir in currentFile.children) {
                 const file = currentFile.children[dir];
                 const newPath = path.concat(`/${dir}`)
                 setPath(newPath);
                 setCurrentFile(file);
                 setDisplayText([...displayText, userInfo.concat(command)]);
+            } else if (dir === '../') {
+                if (path) {
+                    const pathArr = path.split('/').slice(1);
+                    let file = fileStructure.home;
+                    for (let i = 0; i < pathArr.length - 1; i++) {
+                        file = file.children[pathArr[i]];
+                    }
+                    const lastPath = pathArr[pathArr.length - 1];
+                    if (lastPath in file.children) {
+                        const newPath = path.replace(`/${lastPath}`, '');
+                        const newText = USER.concat(path).concat(USER_POSTFIX).concat(command);
+                        setDisplayText([...displayText, newText]);
+                        setPath(newPath);
+                        setCurrentFile(file);
+                    }
+                } else {
+                    const newText = [USER.concat(USER_POSTFIX).concat(command), 'No parent directory'];
+                    setDisplayText(displayText.concat(newText));
+                }
             } else {
-                // cd ../ go back up a folder 
                 const newText = [ USER.concat(path).concat(USER_POSTFIX).concat(command), `${dir}: folder does not exist`]
                 setDisplayText(displayText.concat(newText));
             }
@@ -56,7 +79,8 @@ export const TerminalView = () => {
             setDisplayText(displayText.concat(newText));
             setTimeout(() => {
                 // TODO get base url
-                location.href = `http://localhost:5173${path}`;
+                const baseURL = window.location.origin;
+                location.href = `${baseURL}${path}`;
             }, 1000);
         } else if (command === 'pwd') {
             const newText = [userInfo.concat(command), `printing working directory...`];

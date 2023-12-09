@@ -82,5 +82,5 @@ export const bannerArt = String.raw`
  \ \_____\  \ \_____\  \ \_\ \_\  \ \_\  \ \_\\"\_\ 
   \/_____/   \/_____/   \/_/\/_/   \/_/   \/_/ \/_/ 
 
-enter 'help' to see list of availabled commands
+enter 'help' to see list of supported commands
 `
