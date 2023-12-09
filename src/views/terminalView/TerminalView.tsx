@@ -10,12 +10,13 @@ export const TerminalView = () => {
     const [displayText, setDisplayText] = useState<any[]>([]);
     const [command, setCommand] = useState<string>('');
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
+    const [offset, setOffset] = useState<number>(0);
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure.home);
 
     useEffect(() => {
         const arr: any[] = [];
-        arr.push(<pre className="ascii">{bannerArt}</pre>);
+        arr.push(getBanner(), 'enter \'help\' to see supported commands', <br/>);
         setDisplayText(arr);
     }, []);
 
@@ -23,8 +24,21 @@ export const TerminalView = () => {
         return USER.concat(path).concat(USER_POSTFIX);
     }, [path]);
 
+    const getBanner = () => {
+        return <pre className="ascii">{bannerArt}</pre>
+    }
+
+    const previousCommandText = () => {
+        return (
+            <>
+                {userInfo}
+                <span className='previous-command'>{command}</span>
+            </>
+        )
+    }
+
     const handleBannerCommand = () => {
-        const arr: any[] = [userInfo.concat(command), (<pre className="ascii">{bannerArt}</pre>)];
+        const arr: any[] = [previousCommandText(), getBanner()];
         setDisplayText(displayText.concat(arr));
     }
 
@@ -35,7 +49,7 @@ export const TerminalView = () => {
             const newPath = path.concat(`/${dir}`)
             setPath(newPath);
             setCurrentFile(file);
-            setDisplayText([...displayText, userInfo.concat(command)]);
+            setDisplayText([...displayText, previousCommandText()]);
         } else if (dir === '../') {
             if (path) {
                 const pathArr = path.split('/').slice(1);
@@ -46,7 +60,7 @@ export const TerminalView = () => {
                 const lastPath = pathArr[pathArr.length - 1];
                 if (lastPath in file.children) {
                     const newPath = path.replace(`/${lastPath}`, '');
-                    const newText = userInfo.concat(command);
+                    const newText = previousCommandText();
                     setDisplayText([...displayText, newText]);
                     setPath(newPath);
                     setCurrentFile(file);
@@ -58,7 +72,7 @@ export const TerminalView = () => {
         } else {
             // should go to home dir???
             const message = dir ? `${dir}: folder does not exist` : 'please enter a folder name after \'cd\'';
-            const newText = [ userInfo.concat(command), message];
+            const newText = [ previousCommandText(), message];
             setDisplayText(displayText.concat(newText));
         }
     }
@@ -69,7 +83,7 @@ export const TerminalView = () => {
 
     const handleGoCommand = () => {
         const navPath = path === ' ' ? '/' : path;
-        const newText = [userInfo.concat(command), `navigating to ${navPath}...`];
+        const newText = [previousCommandText(), `navigating to ${navPath}...`];
         setDisplayText(displayText.concat(newText));
         setTimeout(() => {
             const baseURL = window.location.origin;
@@ -78,24 +92,31 @@ export const TerminalView = () => {
     }
 
     const handleHelpCommand = () => {
-        const output = availableCommands.map((command => <div key={command.command} style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
-        const tempArr = [userInfo.concat(command), output];
+        const output = availableCommands.map((command, index) => {
+            return (
+                <div className='help-container' key={command.command + index}>
+                    <div className="help-command-text">{command.command}</div>
+                    <div className="help-description-text">{command.description}</div>
+                </div>
+            )
+        });
+        const tempArr = [previousCommandText(), output];
         setDisplayText(prev => prev.concat(tempArr));
     }
 
     const handleLsCommand = () => {
         if (currentFile.children) {
             let tempArr: any[] = Object.keys(currentFile.children).map(child => <div style={{ paddingLeft: '30px' }}>{child}</div>);
-            tempArr.unshift(userInfo.concat(command));
+            tempArr.unshift(previousCommandText());
             setDisplayText(displayText.concat(tempArr));
         } else {
-            const newText = [userInfo.concat(command), 'not a folder'];
+            const newText = [previousCommandText(), 'not a folder'];
             setDisplayText(displayText.concat(newText));
         }
     }
 
     const handlePwdCommand = () => {
-        const newText = [userInfo.concat(command), `printing working directory...`];
+        const newText = [previousCommandText(), `printing working directory...`];
         setDisplayText(displayText.concat(newText));
         setTimeout(() => {
             window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0');
@@ -103,7 +124,7 @@ export const TerminalView = () => {
     }
 
     const handleCommandNotFound = () => {
-        const newText = [ userInfo.concat(command), `${command}: command not found`]
+        const newText = [previousCommandText(), `${command}: command not found`]
         setDisplayText(displayText.concat(newText));
     }
 
@@ -143,8 +164,6 @@ export const TerminalView = () => {
         }
         handleResetCommand();
     }
-
-    const [offset, setOffset] = useState<number>(0);
 
     const handleKeyUp = () => {
         if (offset < commandHistory.length) {
@@ -196,8 +215,10 @@ export const TerminalView = () => {
 
 /*
     to implement
+        add more commands
+            whoami / bio
+            joke?
         styling for all responses
         follow prompt down when fills whole page
         display text like printing line by line?
-        use arrow keys for previous commands
 */

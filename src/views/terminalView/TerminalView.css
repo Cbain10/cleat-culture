@@ -1,7 +1,5 @@
 input:focus {outline:none!important;}
 
-
-
 .terminal-container {
     width: 100vw;
     height: 100vh;
@@ -12,16 +10,38 @@ input:focus {outline:none!important;}
 
     .ascii {
         line-height: normal;
+        color: white;
+        padding-left: 50px;
     }
 
     .text-input {
-        caret-color: yellowgreen;
+        caret-color: white;
         /* caret-shape: block; */
         border: none;
         width: 200px;
-        color: yellowgreen;
+        color: white;
         font-size: 14pt;
         font-family: monospace;
         background: inherit;
     }
 }
+
+.help-container {
+
+    padding-left: 30px;
+    display: flex;
+
+    .help-command-text {
+        display: inline;
+        color: white;
+        width: 7%;
+    }
+    .help-description-text {
+        display: inline;;
+    }
+}
+
+.previous-command {
+    color: white;
+}
+
