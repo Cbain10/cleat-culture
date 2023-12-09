@@ -30,14 +30,14 @@ export const TerminalView = () => {
         } else if (command === 'clear') {
             setDisplayText([]);
         } else if (command === 'help') {
-            const commandArray: string[] = availableCommands.map((command => `${command.command} - ${command.description}`));
-            commandArray.unshift(userInfo.concat(command));
-            setDisplayText(prev => prev.concat(commandArray));
+            const output = availableCommands.map((command => <div style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
+            const tempArr = [userInfo.concat(command), output];
+            setDisplayText(prev => prev.concat(tempArr));
         } else if (command === 'ls') {
             if (currentFile.children) {
-                let arr = Object.keys(currentFile.children);
-                arr.unshift(userInfo.concat(command));
-                setDisplayText(displayText.concat(arr));
+                let tempArr: any[] = Object.keys(currentFile.children).map(child => <div style={{ paddingLeft: '30px' }}>{child}</div>);
+                tempArr.unshift(userInfo.concat(command));
+                setDisplayText(displayText.concat(tempArr));
             } else {
                 const newText = [USER.concat(path).concat(USER_POSTFIX).concat(command), 'not a folder'];
                 setDisplayText(displayText.concat(newText));
