@@ -70,7 +70,9 @@ export const TerminalView = () => {
                     setDisplayText(displayText.concat(newText));
                 }
             } else {
-                const newText = [ USER.concat(path).concat(USER_POSTFIX).concat(command), `${dir}: folder does not exist`]
+                // should go to home dir???
+                const message = dir ? `${dir}: folder does not exist` : 'please enter a folder name after \'cd\'';
+                const newText = [ USER.concat(path).concat(USER_POSTFIX).concat(command), message];
                 setDisplayText(displayText.concat(newText));
             }
         } else if (command === 'go') {
@@ -78,7 +80,6 @@ export const TerminalView = () => {
             const newText = [userInfo.concat(command), `navigation to ${navPath}...`];
             setDisplayText(displayText.concat(newText));
             setTimeout(() => {
-                // TODO get base url
                 const baseURL = window.location.origin;
                 location.href = `${baseURL}${path}`;
             }, 1000);
@@ -119,7 +120,6 @@ export const TerminalView = () => {
 
 /*
     to implement
-        base URL for location.href (go)
-        cd ../
         styling for all responses
+        follow prompt down when fills whole page
 */
