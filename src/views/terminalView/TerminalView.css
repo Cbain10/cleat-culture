@@ -17,11 +17,11 @@ input:focus {outline:none!important;}
     }
 
     .text-input {
-        caret-color: white;
+        caret-color: rgb(250, 192, 110);
         /* caret-shape: block; */
         border: none;
         width: 200px;
-        color: white;
+        color: rgb(250, 192, 110);
         font-size: 14pt;
         font-family: monospace;
         background: inherit;
@@ -44,6 +44,10 @@ input:focus {outline:none!important;}
 }
 
 .previous-command {
-    color: white;
+    color: rgb(250, 192, 110);
+}
+
+.highlight-text {
+    color: rgb(250, 192, 110);
 }
 

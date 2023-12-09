@@ -72,7 +72,9 @@ export const TerminalView = () => {
             }
         } else {
             // should go to home dir???
-            const message = dir ? `${dir}: folder does not exist` : 'please enter a folder name after \'cd\'';
+            const addFolderMessage = <div>please enter a folder name after <span className="highlight-text">cd</span></div>;
+            const noFolderMessage = <div><span className="highlight-text">{dir}</span>: folder does not exist</div>;
+            const message = dir ? noFolderMessage : addFolderMessage;
             const newText = [ previousCommandText(), message];
             setDisplayText(displayText.concat(newText));
         }
@@ -83,8 +85,9 @@ export const TerminalView = () => {
     }
 
     const handleGoCommand = () => {
-        const navPath = path === ' ' ? '/' : path;
-        const newText = [previousCommandText(), `navigating to ${navPath}...`];
+        const navPath = path === '' ? 'home' : path;
+        const navigateMessage = <div>navigating to <span className="highlight-text">{navPath}</span>...</div>
+        const newText = [previousCommandText(), navigateMessage];
         setDisplayText(displayText.concat(newText));
         setTimeout(() => {
             const baseURL = window.location.origin;
@@ -125,7 +128,8 @@ export const TerminalView = () => {
     }
 
     const handleCommandNotFound = () => {
-        const newText = [previousCommandText(), `${command}: command not found`]
+        const message = <div className=""><span className="highlight-text">{command}</span>: command not found</div>
+        const newText = [previousCommandText(), message];
         setDisplayText(displayText.concat(newText));
     }
 
