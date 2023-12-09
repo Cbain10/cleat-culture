@@ -28,23 +28,6 @@ export const TerminalView = () => {
         setDisplayText(displayText.concat(arr));
     }
 
-    const handleHelpCommand = () => {
-        const output = availableCommands.map((command => <div style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
-        const tempArr = [userInfo.concat(command), output];
-        setDisplayText(prev => prev.concat(tempArr));
-    }
-
-    const handleLsCommand = () => {
-        if (currentFile.children) {
-            let tempArr: any[] = Object.keys(currentFile.children).map(child => <div style={{ paddingLeft: '30px' }}>{child}</div>);
-            tempArr.unshift(userInfo.concat(command));
-            setDisplayText(displayText.concat(tempArr));
-        } else {
-            const newText = [userInfo.concat(command), 'not a folder'];
-            setDisplayText(displayText.concat(newText));
-        }
-    }
-
     const handleCdCommand = () => {
         const dir: string = command.slice(3, command.length);
         if (currentFile.children && dir in currentFile.children) {
@@ -80,6 +63,10 @@ export const TerminalView = () => {
         }
     }
 
+    const handleClearCommand = () => {
+        setDisplayText([]);
+    }
+
     const handleGoCommand = () => {
         const navPath = path === ' ' ? '/' : path;
         const newText = [userInfo.concat(command), `navigating to ${navPath}...`];
@@ -88,6 +75,23 @@ export const TerminalView = () => {
             const baseURL = window.location.origin;
             location.href = `${baseURL}${path}`;
         }, 1000);
+    }
+
+    const handleHelpCommand = () => {
+        const output = availableCommands.map((command => <div style={{ paddingLeft: '30px' }}>{command.command} - {command.description}</div>));
+        const tempArr = [userInfo.concat(command), output];
+        setDisplayText(prev => prev.concat(tempArr));
+    }
+
+    const handleLsCommand = () => {
+        if (currentFile.children) {
+            let tempArr: any[] = Object.keys(currentFile.children).map(child => <div style={{ paddingLeft: '30px' }}>{child}</div>);
+            tempArr.unshift(userInfo.concat(command));
+            setDisplayText(displayText.concat(tempArr));
+        } else {
+            const newText = [userInfo.concat(command), 'not a folder'];
+            setDisplayText(displayText.concat(newText));
+        }
     }
 
     const handlePwdCommand = () => {
@@ -106,10 +110,6 @@ export const TerminalView = () => {
     const handleResetCommand = () => {
         setCommandHistory([...commandHistory, command]);
         setCommand('');
-    }
-
-    const handleClearCommand = () => {
-        setDisplayText([]);
     }
 
     const handleEnterCommand = () => {
