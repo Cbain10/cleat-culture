@@ -113,7 +113,8 @@ export const TerminalView = () => {
     }
 
     const handleEnterCommand = () => {
-        switch (command) {
+        const commandFirstWord = command.split(' ')[0];
+        switch (commandFirstWord) {
             case 'banner':
                 handleBannerCommand();
                 break;
