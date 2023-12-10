@@ -9,14 +9,6 @@ type HangmanProps = {}
 
 export const Hangman: FC<HangmanProps> = ({ }) => {
 
-    const [word, setWord] = useState<string>('');
-
-    useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * possibleWords.length);
-        setWord(possibleWords[randomIndex]);
-        console.log(possibleWords[randomIndex]);
-    }, []);
-
     const getUniqueLetterCount = () => {
         let letters = new Set();
         for (let i = 0; i < word.length; i++) {
@@ -25,13 +17,20 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
         return letters.size;
     }
 
-    const uniqueLetterCount = getUniqueLetterCount();
+    const [word, setWord] = useState<string>('');
     const [correctLetterCount, setCorrectLetterCount] = useState<number>(0);
-
     const [lives, setLives] = useState<number>(5);
     const [guess, setGuess] = useState<string>('');
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-    
+
+    const uniqueLetterCount = getUniqueLetterCount();
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * possibleWords.length);
+        setWord(possibleWords[randomIndex]);
+        console.log(possibleWords[randomIndex]);
+    }, []);
+
     const livesSection = () => {
         let hearts = [];
         for (let i = 0; i < lives; i++) {
@@ -70,17 +69,24 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
     }, [lives]);
 
     useEffect(() => {
-        if (correctLetterCount === uniqueLetterCount) {
+        // FIXME hacky
+        if (correctLetterCount > 0 && correctLetterCount === uniqueLetterCount) {
             console.log('YOU WIN');
             setTimeout(() => {
-                // alert('YOU WIN');
+                alert('YOU WIN');
             }, 1000);
+            setGuessedLetters([]);
+            setCorrectLetterCount(0);
+            setLives(5);
+            setGuess('');
         }
     }, [correctLetterCount]);
 
     const makeGuess = () => {
         const letter = guess.charAt(0);
+        // TODO to lowercase
         if (guessedLetters.includes(letter)) {
+            // todo alert to user out of console
             console.log('guess already made');
             setGuess('');
             return;
@@ -116,19 +122,18 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                 <div className="correct-letters">
                     {resultSection()}
                 </div>
-                <div className="guesser">
-                    <form className='guesser'>
-                        <input
-                            className='input-field'
-                            type='text'
-                            value={guess}
-                            autoFocus
-                            onChange={(e) => setGuess(e.target.value)}
-                            onKeyDown={handleEnter}
-                        />
-                    </form>
-                    <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
-                </div>
+                <form className='guesser'>
+                    <input
+                        className='input-field'
+                        size={1}
+                        type='text'
+                        value={guess}
+                        autoFocus
+                        onChange={(e) => { if (e.target.value.length <= 1) setGuess(e.target.value) }}
+                        onKeyDown={handleEnter}
+                    />
+                </form>
+                <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
                 <div className="guessed-letters">
                     <h3>Guessed Letters:</h3>
                 </div>
@@ -141,3 +146,15 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
         </>
     )
 }
+
+/*
+
+    TODO
+        end of game message
+            win
+            lose
+        play again button
+        restart button
+
+
+*/

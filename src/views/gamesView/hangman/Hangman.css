@@ -10,12 +10,12 @@
 
     .hangman-title {
         position: absolute;
-        top: 50px;
+        top: 20px;
     }
 
     .lives-section {
 
-        margin-bottom: 150px;
+        margin-bottom: 50px;
 
         .life-icon {
             margin: 20px;
@@ -23,11 +23,30 @@
         }
     }
 
+    .input-field {
+        font-size: 40pt;
+        width: 80px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
     .correct-letters {
-        .correct-letter, .line-icon {
-            margin: 10px;
-            font-size: 30pt;
+        font-size: 30pt;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .line-icon {
+            margin: 3px;
+            height: 60px;
         }
+        .correct-letter {
+            width: 76px;
+            margin: 0px;
+            text-align: center;
+            font-size: 40pt;
+        }
+        margin-bottom: 30px;
     }
 
     .letters {
@@ -39,5 +58,10 @@
         justify-content: center;
         align-items: center;
         font-size: 18pt;
+    }
+
+    .submit-guess-btn {
+        width: 140px;
+        font-size: 20pt;
     }
 }

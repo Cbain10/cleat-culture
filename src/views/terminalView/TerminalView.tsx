@@ -92,7 +92,7 @@ export const TerminalView = () => {
         setTimeout(() => {
             const baseURL = window.location.origin;
             location.href = `${baseURL}${path}`;
-        }, 1000);
+        }, 500);
     }
 
     const handleHelpCommand = () => {
@@ -220,10 +220,9 @@ export const TerminalView = () => {
 
 /*
     to implement
+        ***follow prompt down when fills whole page
+        display text like printing line by line?
         add more commands
             whoami / bio
-            joke?
-        styling for all responses
-        follow prompt down when fills whole page
-        display text like printing line by line?
+            joke
 */
