@@ -12,21 +12,11 @@ export type TFile = {
                 name: string;
                 path: string;
                 children: {
-                    cleats: {
+                    archive: {
                         name: string;
                         path: string;
-                        children: {
-                            archive: {
-                                name: string;
-                                path: string;
-                            },
-                            recommender: {
-                                name: string;
-                                path: string;
-                            }
-                        }
                     },
-                    content: {
+                    recommender: {
                         name: string;
                         path: string;
                     }

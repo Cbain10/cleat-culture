@@ -40,23 +40,13 @@ export const fileStructure: TFile = {
                 name: 'soccer',
                 path: '/soccer',
                 children: {
-                    cleats: {
-                        name: 'cleats',
-                        path: '/soccer/cleats',
-                        children: {
-                            archive: {
-                                name: 'archive',
-                                path: '/soccer/cleats/archive',
-                            },
-                            recommender: {
-                                name: 'recommender',
-                                path: 'soccer/cleats/recommender',
-                            }
-                        }
+                    archive: {
+                        name: 'archive',
+                        path: '/soccer/cleats/archive',
                     },
-                    content: {
-                        name: 'content',
-                        path: '/soccer/content',
+                    recommender: {
+                        name: 'recommender',
+                        path: 'soccer/cleats/recommender',
                     }
                 }
             },
