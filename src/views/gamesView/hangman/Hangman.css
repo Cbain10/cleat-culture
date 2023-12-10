@@ -30,6 +30,14 @@
         margin-bottom: 20px;
     }
 
+    .test-floater {
+        position:absolute;
+        height: 20px;
+        padding-top: 16px;
+        padding-left: 16px;
+        
+    }
+
     .correct-letters {
         font-size: 30pt;
         display: flex;
@@ -38,7 +46,7 @@
 
         .line-icon {
             margin: 3px;
-            height: 60px;
+            height: 70px;
         }
         .correct-letter {
             width: 76px;
@@ -57,7 +65,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 18pt;
+        font-size: 22pt;
+
+        .chars {
+            padding: 5px;
+
+        }
     }
 
     .submit-guess-btn {

@@ -4,6 +4,8 @@ import { faHeart, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FC, useEffect, useState } from 'react';
 import { possibleWords } from './Words';
 import { Nav } from '../../../components/nav/Nav';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 
 type HangmanProps = {}
 
@@ -22,6 +24,8 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
     const [lives, setLives] = useState<number>(5);
     const [guess, setGuess] = useState<string>('');
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+    const [correctGuess, setCorrectGuess] = useState<boolean>(false);
+    const [repeatLetter, setRepeatLetter] = useState<boolean>(false);
 
     const uniqueLetterCount = getUniqueLetterCount();
 
@@ -87,15 +91,17 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
         // TODO to lowercase
         if (guessedLetters.includes(letter)) {
             // todo alert to user out of console
-            console.log('guess already made');
+            setRepeatLetter(true);
             setGuess('');
             return;
         } else if (word.includes(letter) && !guessedLetters.includes(letter)) {
-            console.log('correct!');
             setCorrectLetterCount(correctLetterCount + 1);
+            setCorrectGuess(true);
+            setRepeatLetter(false);
         } else {
-            console.log('wrong guess');
+            setRepeatLetter(false);
             setLives(lives - 1);
+            setCorrectGuess(false);
         }
         setGuessedLetters([...guessedLetters, letter]);
         setGuess('');
@@ -143,6 +149,14 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                         onChange={(e) => { if (e.target.value.length <= 1) setGuess(e.target.value) }}
                         onKeyDown={handleEnter}
                     />
+                    {!!guessedLetters.length &&
+                        <span className='test-floater'>
+                            {repeatLetter
+                                ? <span className='highlight-text'>Already guessed letter</span>
+                                : <>{correctGuess ? <CheckIcon fontSize='large' color='success'/> : <ClearIcon fontSize='large' className='highlight-text' />}</>
+                            }
+                        </span>
+                    }
                 </form>
                 <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
                 <div className="guessed-letters">
@@ -166,7 +180,6 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
             lose
         play again button
         restart button
-        dif colors for incorrect guessed letters
         *color constant!
 
 */
