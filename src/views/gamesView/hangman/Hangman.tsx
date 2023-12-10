@@ -74,11 +74,11 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
             console.log('YOU WIN');
             setTimeout(() => {
                 alert('YOU WIN');
+                setGuessedLetters([]);
+                setCorrectLetterCount(0);
+                setLives(5);
+                setGuess('');
             }, 1000);
-            setGuessedLetters([]);
-            setCorrectLetterCount(0);
-            setLives(5);
-            setGuess('');
         }
     }, [correctLetterCount]);
 
@@ -99,6 +99,17 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
         }
         setGuessedLetters([...guessedLetters, letter]);
         setGuess('');
+    }
+
+    const displayGuessedLetters = () => {
+        const arr: any[] = guessedLetters.map(letter => {
+            if (word.includes(letter)) {
+                return <span>{letter}</span>
+            } else {
+                return <span className='highlight-text'>{letter}</span>
+            }
+        });
+        return arr;
     }
 
     const handleEnter = (event: any) => {
@@ -138,7 +149,7 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                     <h3>Guessed Letters:</h3>
                 </div>
                 <div className='letters'>
-                    {guessedLetters.map((letter) => {
+                    {displayGuessedLetters().map((letter) => {
                         return <div className="chars" key={letter}>{letter}</div>
                     })}
                 </div>
@@ -155,6 +166,7 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
             lose
         play again button
         restart button
-
+        dif colors for incorrect guessed letters
+        *color constant!
 
 */
