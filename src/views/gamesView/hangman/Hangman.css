@@ -73,8 +73,15 @@
         }
     }
 
-    .submit-guess-btn {
-        width: 140px;
-        font-size: 20pt;
+    .btn-container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 25%;
+
+        .btn {
+            width: 160px;
+            font-size: 20pt;
+            display: inline;
+        }
     }
 }

@@ -19,7 +19,11 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
         return letters.size;
     }
 
-    const [word, setWord] = useState<string>('');
+    const getRandomWord = () => {
+        return possibleWords[Math.floor(Math.random() * possibleWords.length)];
+    }
+
+    const [word, setWord] = useState<string>(getRandomWord());
     const [correctLetterCount, setCorrectLetterCount] = useState<number>(0);
     const [lives, setLives] = useState<number>(5);
     const [guess, setGuess] = useState<string>('');
@@ -29,68 +33,29 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
 
     const uniqueLetterCount = getUniqueLetterCount();
 
-    useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * possibleWords.length);
-        setWord(possibleWords[randomIndex]);
-        console.log(possibleWords[randomIndex]);
-    }, []);
-
-    const livesSection = () => {
-        let hearts = [];
-        for (let i = 0; i < lives; i++) {
-            hearts.push(
-                <span key={i} className='life-icon'>
-                    <FontAwesomeIcon className='icon' icon={faHeart} size='3x' />
-                </span>);
-        }
-        return hearts;
+    const handleGameOver = (message: string, timeout: number) => {
+        setTimeout(() => {
+            alert(message);
+            restartGame();
+        }, timeout);
     }
 
-    const resultSection = () => {
-        let lines = [];
-        for (let i = 0; i < word.length; i++) {
-            if (guessedLetters.includes(word[i])) {
-                lines.push(
-                    <span className='correct-letter' key={i}>
-                        {word[i]}
-                    </span>
-                )
-            } else {
-                lines.push(
-                    <span className='line-icon' key={i}>
-                        <FontAwesomeIcon icon={faMinus} size='2x' />
-                    </span>
-                )
-            }
-        }
-        return lines;
+    const restartGame = () => {
+        setGuessedLetters([]);
+        setCorrectLetterCount(0);
+        setWord(getRandomWord());
+        setLives(5);
+        setGuess('');
     }
 
     useEffect(() => {
-        if (lives === 0) {
-            console.log('game over');
-        }
-    }, [lives]);
-
-    useEffect(() => {
-        // FIXME hacky
-        if (correctLetterCount > 0 && correctLetterCount === uniqueLetterCount) {
-            console.log('YOU WIN');
-            setTimeout(() => {
-                alert('YOU WIN');
-                setGuessedLetters([]);
-                setCorrectLetterCount(0);
-                setLives(5);
-                setGuess('');
-            }, 1000);
-        }
-    }, [correctLetterCount]);
+        if (lives === 0) handleGameOver("Game over - YOU LOSE", 1000);
+        if (correctLetterCount && correctLetterCount === uniqueLetterCount) handleGameOver('YOU WIN!', 600);
+    }, [lives, correctLetterCount]);
 
     const makeGuess = () => {
-        const letter = guess.charAt(0);
-        // TODO to lowercase
+        const letter = guess.charAt(0).toLowerCase();
         if (guessedLetters.includes(letter)) {
-            // todo alert to user out of console
             setRepeatLetter(true);
             setGuess('');
             return;
@@ -132,12 +97,12 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                 <h1 className='hangman-title'>HANGMAN</h1>
                 <div className='lives-section'>
                     {lives > 0
-                        ? livesSection()
+                        ? livesSection(lives)
                         : <h1>GAME OVER: {word}</h1>
                     }
                 </div>
                 <div className="correct-letters">
-                    {resultSection()}
+                    {resultSection(word, guessedLetters)}
                 </div>
                 <form className='guesser'>
                     <input
@@ -158,7 +123,10 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
                         </span>
                     }
                 </form>
-                <button className='submit-guess-btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
+                <div className='btn-container'>
+                    <button className='btn' onClick={makeGuess} disabled={lives < 1}>Guess</button>
+                    <button className='btn highlight-text' onClick={restartGame} disabled={lives < 1}>Restart</button>
+                </div>
                 <div className="guessed-letters">
                     <h3>Guessed Letters:</h3>
                 </div>
@@ -172,14 +140,38 @@ export const Hangman: FC<HangmanProps> = ({ }) => {
     )
 }
 
+const resultSection = (word: string, guessedLetters: string[]) => {
+    let lines = [];
+    for (let i = 0; i < word.length; i++) {
+        if (guessedLetters.includes(word[i])) {
+            lines.push(
+                <span className='correct-letter' key={i}>
+                    {word[i]}
+                </span>
+            )
+        } else {
+            lines.push(
+                <span className='line-icon' key={i}>
+                    <FontAwesomeIcon icon={faMinus} size='2x' />
+                </span>
+            )
+        }
+    }
+    return lines;
+}
+
+const livesSection = (lives: number) => {
+    let hearts = [];
+    for (let i = 0; i < lives; i++) {
+        hearts.push(
+            <span key={i} className='life-icon'>
+                <FontAwesomeIcon className='icon' icon={faHeart} size='3x' />
+            </span>);
+    }
+    return hearts;
+}
+
 /*
-
     TODO
-        end of game message
-            win
-            lose
-        play again button
-        restart button
         *color constant!
-
 */
