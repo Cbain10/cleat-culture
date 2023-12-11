@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { Link } from "react-router-dom";
-import './Chooser.css';
+import './Recommender.css';
 import { Slider } from "@mui/material";
 import { dynamoCleatService } from "../../../services/serverless/DynamoCleatService";
 import { Cleat } from "../../../types/types";

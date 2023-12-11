@@ -3,7 +3,7 @@ import Home from './views/home/Home';
 import CleatPage from './views/soccerView/cleatPage/CleatPage';
 import ErrorPage from './views/errorPage/ErrorPage';
 import CleatTable from './views/soccerView/cleatArchive/CleatArchive';
-import Chooser from './views/soccerView/chooser/Chooser';
+import Chooser from './views/soccerView/chooser/Recommender';
 import { SoccerView } from './views/soccerView/SoccerView';
 import { GamesView } from './views/gamesView/GamesView';
 import { Hangman } from './views/gamesView/hangman/Hangman';
