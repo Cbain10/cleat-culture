@@ -13,7 +13,7 @@ const Chooser = () => {
     const [comfort, setComfort] = useState<number>(3);
     const [lockdown, setLockdown] = useState<number>(3);
     const [upper, setUpper] = useState<string>('any');
-    const [result, setResult] = useState<Cleat[]>([]);
+    const [results, setResults] = useState<Cleat[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const uppers = [
@@ -24,14 +24,14 @@ const Chooser = () => {
     ];
 
     const options = uppers.map((option) => {
-        return <option value={option.value}>{option.text}</option>
+        return <option key={option.value} value={option.value}>{option.text}</option>
     });
 
     const getCleatsHandler = () => {
         setLoading(true);
         dynamoCleatService.getCleatsByValue(width*2, comfort*2, lockdown*2, upper)
             .then((response) => {
-                setResult(response);
+                setResults(response);
                 setLoading(false);
             });
     }
@@ -41,6 +41,7 @@ const Chooser = () => {
         setWidth(3);
         setLockdown(3);
         setUpper('any');
+        setResults(undefined);
     }
 
     const marks = [
@@ -51,101 +52,124 @@ const Chooser = () => {
         { value: 5, label: '5' }
     ]
 
+    const SelectionsSection = () => {
+        return (
+            <div className='selections-container'>
+                <div className="selection-category">
+                    <h3 className="category">Width</h3>
+                    <Slider
+                        value={width}
+                        onChange={(e, val) => {
+                            console.log(e);
+                            setWidth(Array.isArray(val) ? val[0] : val)
+                        }}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
+                    />
+                </div>
+                <div className="selection-category">
+                    <h3 className="category">Comfort</h3>
+                    <Slider
+                        value={comfort}
+                        onChange={(e, val) => {
+                            console.log(e);
+                            setComfort(Array.isArray(val) ? val[0] : val)
+                        }}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
+                    />
+                </div>
+                <div className="selection-category">
+                    <h3 className="category">Lockdown</h3>
+                    <Slider
+                        value={lockdown}
+                        onChange={(e, val) => {
+                            console.log(e);
+                            setLockdown(Array.isArray(val) ? val[0] : val)
+                        }}
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={5}
+                    />
+                </div>
+                <div className="upper-section">
+                    <h3 className="category">Upper</h3>
+                    <select
+                        className="selector"
+                        value={upper}
+                        onChange={(e) => setUpper(e.target.value)}
+                    >{options}</select>    
+                </div>
+                <button className="get-cleats-btn" onClick={getCleatsHandler}>Get Cleats</button>
+            </div>
+        )
+    }
+
+    const LoadingSpinner = () => {
+        return (
+            <div className="spinner">
+                <ClipLoader
+                    color={'#5fe4fe'}
+                    loading={true}
+                    size={150}
+                    aria-label='Loading Spinner'
+                />
+            </div>
+        )
+    }
+
+    const ResultsSection = () => {
+        return (
+            <div className='results-section'>   
+                <h1>Results:</h1>
+                <button
+                    className="reset-btn"
+                    onClick={resetValuesHandler}    
+                >Reset</button>
+                <br />
+                {results?.length === 0 && 
+                    <div>Sorry, no results</div>
+                }
+                {results?.length && 
+                    results?.map((boot) => {
+                        return (
+                            <Link className='cleat-item' key={boot.cleatName} to={`/cleat/${boot.cleatName}`}>
+                                {boot.imageUrl &&
+                                    <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
+                                }
+                                <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
+                            </Link>
+                        )
+                    })}
+            </div>
+        )
+    }
+
     return (
         <>
             <Nav />
-            <div className='chooser-container'>
-                <h2>Let's find the right cleats for you!</h2>
-                <div className='aspects-container'>
-
-                    <div className="width-section">
-                        <h3>Width (1-5)</h3>
-                        <Slider
-                            value={width}
-                            // onChange={width => setWidth(width.target.value)}
-                            step={1}
-                            marks={marks}
-                            min={1}
-                            max={5}
-                        />
-                    </div>
-                    <div className="comfort-section">
-                        <h3>Comfort (1-5)</h3>
-                        <Slider
-                            value={comfort}
-                            // onChange={e => setComfort(e.target.value)}
-                            step={1}
-                            marks={marks}
-                            min={1}
-                            max={5}
-                        />
-                    </div>
-                    <div className="lockdown-section">
-                        <h3>Lockdown (1-5)</h3>
-                        <Slider
-                            value={lockdown}
-                            // onChange={e => setLockdown(e.target.value)}
-                            step={1}
-                            marks={marks}
-                            min={1}
-                            max={5}
-                        />
-                    </div>
-
-                    <div className="upper-section">
-                        <h3>Upper</h3>
-                        <select
-                            className="upper-options"
-                            value={upper}
-                            onChange={(e) => setUpper(e.target.value)}
-                        >{options}</select>    
-                    </div>
-                    <br />
-
-                    <div className="reset-container">
-                        <span className="reset-button" onClick={resetValuesHandler}>Reset Values</span>
-                        <span className="reset-button" onClick={() => setResult([])}>Reset Results</span>
-                    </div>
-                    <div className="get-container">
-                        <div className="get-cleats-button" onClick={getCleatsHandler}>Get Cleats!</div>
-                    </div>
-                </div>
-
-                <div className='results-section'>
-                    {loading && 
-                        <ClipLoader
-                        color={'red'}
-                        loading={true}
-                        size={150}
-                        aria-label='Loading Spinner'
-                        />
-                    }
-                    {!loading &&    
-                        <div className='result-cleats'>
-                            <h1>Results:</h1>
-                            <br />
-                            {result.length === 0 && 
-                                <div>Sorry, no results</div>
-                            }
-                            {result.length > 0 && 
-                                result.map((boot) => {
-                                    return (
-                                        <Link to={`/cleat/${boot.cleatName}`}>
-                                            <div className="cleat-item">
-                                                {boot.imageUrl &&
-                                                    <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
-                                                }
-                                                <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
-                                            </div>
-                                        </Link>
-                                    )
-                                })}
-                        </div>
-                    }
-                </div>
+            <div className="recommender-container">
+                {(!results && !loading) &&
+                    SelectionsSection()
+                }
+                {loading &&
+                    LoadingSpinner()
+                }
+                {results &&
+                    ResultsSection()
+                }
             </div>
         </>
     )
 }
+
+
+
+
 
 export default Chooser;

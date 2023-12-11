@@ -1,74 +1,82 @@
-.chooser-container {
-    margin: auto;
-    width: 70%;
+.recommender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .aspects-container {
-        float: left;
-        text-align: left;
-        width: 30%;
+    color: var(--primary-color);
 
-        .upper-options {
-            font-size: 25px;
-            width: 100%;
+    .selections-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+
+
+        .selection-category {
+            text-align: center;
+            width: 40%;
         }
 
-        .get-container {
-            width: 100%;
+        .upper-section {
+            text-align: center;
+            width: 40%;
+            margin-bottom: 20px;
 
-            .get-cleats-button {
-                margin: auto;
-                width: 80%;
-                left: 50%;
-                text-align: center;
-                justify-content: center;
-                padding: 5px;
-                background-color: blue;
-                color: white;
-                font-size: 28px;
-                margin-top: 40px;
-                border-radius: 25px;
-                border: 1px solid black; 
-                cursor: pointer;
+            .selector {
+                font-size: 28pt;
+                width: 40%;
             }
         }
 
-        .reset-container {
-            margin-top: 20px;
-
-            .reset-button {
-                justify-content: center;
-                width: 25%;
-                margin: 20px 20px 10px 10px;
-                color: blue;
-                background-color: white;
-                border-radius: 20px;
-                border: 1px solid blue;
-                padding: 10px;
-            }
+        .get-cleats-btn {
+            width: 16%;
+            font-size: 24pt;
         }
+    }
 
+    .category {
+        font-size: 20pt;
+    }
+
+    .spinner {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
     }
 
     .results-section {
-        float: right;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+
+        .reset-btn {
+            position: absolute;
+            top: 4vh;
+            left: 59vw;
+            color: var(--secondary-color);
+        }
 
         .cleat-item {
-            padding: 30px 50px 50px 50px;
-            text-align: left;
-            border: 1px solid gray;
+            display: flex;
+            width: 30%;
+            border: 1px solid var(--primary-color);
             border-radius: 10px;
-            margin-bottom: 25px;
-        }
+            margin: 10px;
 
-        .cleat-label {
-            display: inline-block;
-            padding-left: 20px;
-            font-size: 18pt;
-        }
-
-        .cleat-image {
-            float: left;
+            .cleat-image {
+                border-radius: 10px;
+            }
+            .cleat-label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                /* text-align: center; */
+            }
         }
     }
-
 }
