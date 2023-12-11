@@ -33,7 +33,7 @@ export const TerminalView = () => {
         return (
             <>
                 {userInfo}
-                <span className='previous-command'>{command}</span>
+                <span className='highlight-text'>{command}</span>
             </>
         )
     }

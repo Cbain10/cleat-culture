@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
 
-    color: #5fe4fe;
+    color: var(--primary-color);
 
     .hangman-title {
         position: absolute;
@@ -60,7 +60,7 @@
     .letters {
         width: 30vw;
         height: 10vh;
-        border: 1px solid #5fe4fe;
+        border: 1px solid var(--primary-color);
         border-radius: 10px;
         display: flex;
         justify-content: center;
