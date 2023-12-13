@@ -7,7 +7,7 @@ import { dynamoCleatService } from "../../../services/serverless/DynamoCleatServ
 import { Cleat } from "../../../types/types";
 import { Nav } from "../../../components/nav/Nav";
 
-const Chooser = () => {
+const Recommender = () => {
 
     const [width, setWidth] = useState<number>(3);
     const [comfort, setComfort] = useState<number>(3);
@@ -138,7 +138,7 @@ const Chooser = () => {
                 {results?.length && 
                     results?.map((boot) => {
                         return (
-                            <Link className='cleat-item' key={boot.cleatName} to={`soccer/cleat/${boot.cleatName}`}>
+                            <Link className='cleat-item' key={boot.cleatName} to={`/soccer/archive/${boot.cleatName}`}>
                                 {boot.imageUrl &&
                                     <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
                                 }
@@ -172,4 +172,4 @@ const Chooser = () => {
 
 
 
-export default Chooser;
+export default Recommender;
