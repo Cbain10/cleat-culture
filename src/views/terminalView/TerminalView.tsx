@@ -13,6 +13,11 @@ export const TerminalView = () => {
     const [offset, setOffset] = useState<number>(0);
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure.home);
+    const element = document.getElementById('command');
+
+    useEffect(() => {
+        element?.scrollIntoView({ behavior: 'instant', block: 'end' })
+    }, [displayText]);
 
     useEffect(() => {
         const arr: any[] = [];
@@ -198,7 +203,7 @@ export const TerminalView = () => {
             {displayText.map((line, index) => {
                 return <div key={index}>{line}</div>
             })}
-            <div>
+            <div id='command'>
                 {userInfo}
                 <input
                     className="text-input"
@@ -220,8 +225,7 @@ export const TerminalView = () => {
 
 /*
     to implement
-        ***follow prompt down when fills whole page
-        display text like printing line by line?
+        display text like printing line by line
         add more commands
             whoami / bio
             joke
