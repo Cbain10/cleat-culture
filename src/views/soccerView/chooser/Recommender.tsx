@@ -138,7 +138,7 @@ const Chooser = () => {
                 {results?.length && 
                     results?.map((boot) => {
                         return (
-                            <Link className='cleat-item' key={boot.cleatName} to={`/cleat/${boot.cleatName}`}>
+                            <Link className='cleat-item' key={boot.cleatName} to={`soccer/cleat/${boot.cleatName}`}>
                                 {boot.imageUrl &&
                                     <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
                                 }

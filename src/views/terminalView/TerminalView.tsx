@@ -119,7 +119,8 @@ export const TerminalView = () => {
             tempArr.unshift(previousCommandText());
             setDisplayText(displayText.concat(tempArr));
         } else {
-            const newText = [previousCommandText(), 'not a folder'];
+            const message = <div>not a folder, enter <span className="highlight-text">go</span> to navigate to <span className="highlight-text">{path}</span></div>
+            const newText = [previousCommandText(), message];
             setDisplayText(displayText.concat(newText));
         }
     }

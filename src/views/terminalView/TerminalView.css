@@ -1,8 +1,6 @@
 input:focus {outline:none!important;}
 
 .terminal-container {
-    width: 100vw;
-    height: 100vh;
     color: var(--primary-color);
     font-size: 14pt;
     font-family: monospace;
