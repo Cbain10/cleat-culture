@@ -14,12 +14,12 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<TerminalView />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/soccer' element={<SoccerView />} />
           <Route path='/soccer/archive' element={<CleatTable />} />
           <Route path='/soccer/archive/:id' element={<CleatPage />} />
           <Route path='/soccer/recommender' element={<Recommender />} />
-          <Route path='/terminal' element={<TerminalView />} />
           <Route path='/games' element={<GamesView />} />
           <Route path='/games/hangman' element={<Hangman />} />
           <Route path='*' element={<ErrorPage />} />

@@ -22,8 +22,17 @@ export const TerminalView = () => {
 
     useEffect(() => {
         const arr: any[] = [];
-        const helpText = <div style={{ paddingLeft: '30px' }}>enter <span style={{ color: 'rgb(250, 192, 110)'}}>help</span> to see supported commands</div>
-        arr.push(getBanner(), helpText);
+        const helpText = (
+            <div style={{ paddingLeft: '30px' }}>For a list of available commands, type
+                <span className="highlight-text"> help</span> and hit <span className="highlight-text">enter</span>
+            </div>
+        );
+        const guiText = (
+            <div style={{ paddingLeft: '30px' }}>To jump to GUI (normal website), type
+                <span className="highlight-text"> go</span> and hit <span className="highlight-text">enter</span>
+            </div>
+        );
+        arr.push(getBanner(), helpText, guiText);
         setDisplayText(arr);
     }, []);
 
@@ -95,13 +104,13 @@ export const TerminalView = () => {
     }
 
     const handleGoCommand = () => {
-        const navPath = path === '' ? 'home' : path;
+        const navPath = path === '' ? '/home' : path;
         const navigateMessage = <div>navigating to <span className="highlight-text">{navPath}</span>...</div>
         const newText = [previousCommandText(), navigateMessage];
         setDisplayText(displayText.concat(newText));
         setTimeout(() => {
             const baseURL = window.location.origin;
-            location.href = `${baseURL}${path}`;
+            location.href = `${baseURL}${navPath}`;
         }, 500);
     }
 
