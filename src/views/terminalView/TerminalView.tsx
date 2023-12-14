@@ -13,6 +13,7 @@ export const TerminalView = () => {
     const [offset, setOffset] = useState<number>(0);
     const [path, setPath] = useState('');
     const [currentFile, setCurrentFile] = useState(fileStructure.home);
+    const [postText, setPostText] = useState<any>([]);
     const element = document.getElementById('command');
 
     useEffect(() => {
@@ -144,6 +145,7 @@ export const TerminalView = () => {
     }
 
     const handleResetCommand = () => {
+        if (postText.length) setPostText([]);
         commandHistory.unshift(command);
         setCommandHistory([...commandHistory]);
         setCommand('');
@@ -204,18 +206,19 @@ export const TerminalView = () => {
     }
 
     const handleTabKeyPressed = () => {
-        if (command.includes('cd')) {
+        if (command === 'cd ') {
+            const fchildren = Object.entries(currentFile.children);
+            const arr = fchildren.map(child => child[0]);
+            setPostText(arr);
+        } else if (command.includes('cd')) {
             const dir: string = command.slice(3, command.length);
-            const currentLength = dir.length;
-            const possibleFolders = Object.entries(currentFile.children);
-            // get all that match, if array has length 1?
-            const temp = possibleFolders.filter((folder) => folder[0].substring(0, currentLength) === dir);
-            if (temp.length === 1) {
-                setCommand(`cd ${temp[0][0]}`);
+            const possibleFolders = Object.entries(currentFile.children).filter((folder) => folder[0].substring(0, dir.length) === dir);
+            if (possibleFolders.length === 1) {
+                setCommand(`cd ${possibleFolders[0][0]}`);
             }
-            console.log(possibleFolders);
         } else {
-
+            // TODO - display possible commands (not directories)
+            setPostText(['displaying possible commands here...']);
         }
     }
 
@@ -232,6 +235,7 @@ export const TerminalView = () => {
                     autoFocus
                     value={command}
                     onChange={(e) => setCommand(e.target.value)}
+                    // TODO move all this into a single handler function
                     onKeyDown={(e) => {
                         if (e.key === "Enter") handleEnterKeyPressed();
                         else if (e.key === 'ArrowUp') handleUpArrowPressed();
@@ -244,13 +248,15 @@ export const TerminalView = () => {
                     onBlur={e => e.target.focus()}
                 />
             </div>
+            {postText.map((line: any, index: number) => {
+                return <div key={index}>{line}</div>
+            })}
         </div>
     )
 }
 
 /*
     to implement
-        cd gam... tab autocomplete
         display text like printing line by line
         add more commands
             whoami / bio
