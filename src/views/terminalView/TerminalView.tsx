@@ -50,7 +50,11 @@ export const TerminalView = () => {
 
     const handleCdCommand = () => {
         const dir: string = command.slice(3, command.length);
-        if (currentFile.children && dir in currentFile.children) {
+        if (command === 'cd' || command === 'cd ') {
+            setCurrentFile(fileStructure.home);
+            setPath('');
+            setDisplayText([...displayText, previousCommandText()]);
+        } else if (currentFile.children && dir in currentFile.children) {
             const file = currentFile.children[dir];
             const newPath = path.concat(`/${dir}`)
             setPath(newPath);
@@ -145,7 +149,7 @@ export const TerminalView = () => {
         setCommand('');
     }
 
-    const handleEnterCommand = () => {
+    const handleEnterKeyPressed = () => {
         const commandFirstWord = command.split(' ')[0];
         switch (commandFirstWord) {
             case 'banner':
@@ -176,7 +180,7 @@ export const TerminalView = () => {
         handleResetCommand();
     }
 
-    const handleKeyUp = () => {
+    const handleUpArrowPressed = () => {
         if (offset < commandHistory.length) {
             const newOffset = offset + 1;
             setOffset(newOffset);
@@ -184,7 +188,7 @@ export const TerminalView = () => {
         }
     }
 
-    const handleKeyDown = () => {
+    const handleDownArrowPressed = () => {
         if (offset === 0) {
             // do nothing
         }
@@ -196,6 +200,22 @@ export const TerminalView = () => {
             const newOffset = offset - 1;
             setOffset(newOffset);
             setCommand(commandHistory[newOffset - 1]);
+        }
+    }
+
+    const handleTabKeyPressed = () => {
+        if (command.includes('cd')) {
+            const dir: string = command.slice(3, command.length);
+            const currentLength = dir.length;
+            const possibleFolders = Object.entries(currentFile.children);
+            // get all that match, if array has length 1?
+            const temp = possibleFolders.filter((folder) => folder[0].substring(0, currentLength) === dir);
+            if (temp.length === 1) {
+                setCommand(`cd ${temp[0][0]}`);
+            }
+            console.log(possibleFolders);
+        } else {
+
         }
     }
 
@@ -213,9 +233,13 @@ export const TerminalView = () => {
                     value={command}
                     onChange={(e) => setCommand(e.target.value)}
                     onKeyDown={(e) => {
-                        if (e.key === "Enter") handleEnterCommand();
-                        else if (e.key === 'ArrowUp') handleKeyUp();
-                        else if (e.key === 'ArrowDown') handleKeyDown();
+                        if (e.key === "Enter") handleEnterKeyPressed();
+                        else if (e.key === 'ArrowUp') handleUpArrowPressed();
+                        else if (e.key === 'ArrowDown') handleDownArrowPressed();
+                        else if (e.key === 'Tab') {
+                            e.preventDefault();
+                            handleTabKeyPressed();
+                        }
                     }}
                     onBlur={e => e.target.focus()}
                 />
@@ -226,6 +250,7 @@ export const TerminalView = () => {
 
 /*
     to implement
+        cd gam... tab autocomplete
         display text like printing line by line
         add more commands
             whoami / bio
