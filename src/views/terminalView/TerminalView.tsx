@@ -22,17 +22,17 @@ export const TerminalView = () => {
 
     useEffect(() => {
         const arr: any[] = [];
-        const helpText = (
-            <div style={{ paddingLeft: '30px' }}>For a list of available commands, type
-                <span className="highlight-text"> help</span> and hit <span className="highlight-text">enter</span>
-            </div>
-        );
         const guiText = (
             <div style={{ paddingLeft: '30px' }}>To jump to GUI (normal website), type
                 <span className="highlight-text"> go</span> and hit <span className="highlight-text">enter</span>
             </div>
         );
-        arr.push(getBanner(), helpText, guiText);
+        const helpText = (
+            <div style={{ paddingLeft: '30px' }}>For a list of available commands, type
+                <span className="highlight-text"> help</span> and hit <span className="highlight-text">enter</span>
+            </div>
+        );
+        arr.push(getBanner(), guiText, helpText);
         setDisplayText(arr);
     }, []);
 
@@ -226,8 +226,10 @@ export const TerminalView = () => {
                 setCommand(`cd ${possibleFolders[0][0]}`);
             }
         } else {
-            // TODO - display possible commands (not directories)
-            setPostText(['displaying possible commands here...']);
+            const possibleCommands = availableCommands
+                .map(com => com.command)
+                .filter(com => com.substring(0, command.length) === command);
+            setPostText(possibleCommands);
         }
     }
 
