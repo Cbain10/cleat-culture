@@ -28,38 +28,33 @@ const CleatPage = () => {
     }, [cleatName]);
 
     return (
-        <>
+        <div className="cleat-page-container">
             <Nav />
             {loading &&
                 <ClipLoader
-                    color={'red'}
+                    color={'#5fe4fe'}
                     loading={true}
                     size={150}
                     aria-label='Loading Spinner'
                 />
             }
-            {!loading &&
-                <>
-                    <Link to={`/chooser`}>
-                        {/* <BackButton buttonText={'Back to results'} /> */}
-                    </Link>
-                    {cleat && 
-                        <div className="cleat-section">
-                            <h2>{cleat.cleatName}</h2>
-                            <img alt={cleat.cleatName} src={cleat.imageUrl} width="400px" />
-                            <div className="cleat-specs">
-                                <p>Brand - {cleat.brand}</p>
-                                <p>Overall - { ((cleat.comfort + cleat.width + cleat.lockdown) / 3).toFixed(1) }</p>
-                                <p>Comfort - {cleat.comfort}</p>
-                                <p>Width - {cleat.width}</p>
-                                <p>Lockdown - {cleat.lockdown}</p>
-                                <p>Upper - {cleat.upper}</p>
-                            </div>
+            {(!loading && cleat) &&
+                <div className="cleat-section">
+                    <h2 className='title'>{cleat.cleatName}</h2>
+                    <div className='content'>
+                        <img className='left-section' alt={cleat.cleatName} src={cleat.imageUrl} width="400px" />
+                        <div className="right-section">
+                            <p>Brand - {cleat.brand}</p>
+                            <p>Overall - { ((cleat.comfort + cleat.width + cleat.lockdown) / 3).toFixed(1) }</p>
+                            <p>Comfort - {cleat.comfort}</p>
+                            <p>Width - {cleat.width}</p>
+                            <p>Lockdown - {cleat.lockdown}</p>
+                            <p>Upper - {cleat.upper}</p>
                         </div>
-                    }
-                </>
+                    </div>
+                </div>
             }
-        </>
+        </div>
     )
 }
 
