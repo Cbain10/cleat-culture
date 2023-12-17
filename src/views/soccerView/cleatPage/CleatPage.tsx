@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import './CleatPage.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { dynamoCleatService } from '../../../services/serverless/DynamoCleatService';
@@ -18,13 +18,16 @@ const CleatPage = () => {
     useEffect(() => {
         let formattedName = cleatName;
         if (cleatName.includes("%")) {
-            formattedName = cleatName.replace('%20', ' ');
+            formattedName = cleatName.replaceAll('%20', ' ');
         }
+        console.log(formattedName);
         dynamoCleatService.getCleatByName(formattedName)
             .then((response) => {
+                console.log(response);
                 setCleat(response[0]);
                 setLoading(false);
             })
+            .catch(err => console.error(err));
     }, [cleatName]);
 
     return (

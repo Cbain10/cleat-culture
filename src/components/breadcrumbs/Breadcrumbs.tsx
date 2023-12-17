@@ -9,7 +9,7 @@ export const Breadcrumbs = () => {
     const crumbs = location.pathname.split('/')
         .filter(crumb => crumb !== '')
         .map(crumb => {
-            const displayCrumb = crumb.includes('%') ? crumb.replace('%20', ' ') : crumb;
+            const displayCrumb = crumb.includes('%') ? crumb.replaceAll('%20', ' ') : crumb;
             currentLink += `/${crumb}`
             return (
                 <Link key={crumb} to={currentLink}>{`/ ${displayCrumb} `}</Link>
