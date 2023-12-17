@@ -138,7 +138,7 @@ const Recommender = () => {
                 {results?.length && 
                     results?.map((boot) => {
                         return (
-                            <Link className='cleat-item' key={boot.cleatName} to={`/soccer/archive/${boot.cleatName}`}>
+                            <Link className='cleat-item' key={boot.cleatName} to={`/soccer/recommender/${boot.cleatName}`}>
                                 {boot.imageUrl &&
                                     <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
                                 }

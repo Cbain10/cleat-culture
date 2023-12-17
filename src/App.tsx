@@ -19,6 +19,7 @@ function App() {
           <Route path='/soccer' element={<SoccerView />} />
           <Route path='/soccer/archive' element={<CleatTable />} />
           <Route path='/soccer/archive/:id' element={<CleatPage />} />
+          <Route path='/soccer/recommender/:id' element={<CleatPage />} />
           <Route path='/soccer/recommender' element={<Recommender />} />
           <Route path='/games' element={<GamesView />} />
           <Route path='/games/hangman' element={<Hangman />} />
