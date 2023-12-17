@@ -7,7 +7,7 @@ import { Breadcrumbs } from '../breadcrumbs/Breadcrumbs';
 export const Nav = () => {
     return (
         <div className='nav-container'>
-            <Link to={'/home'} >
+            <Link to={'/'} >
                 <GenericButton width={50} height={50} >
                     <HomeRoundedIcon fontSize='large'/>
                 </GenericButton>

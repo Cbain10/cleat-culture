@@ -104,7 +104,7 @@ export const TerminalView = () => {
     }
 
     const handleGoCommand = () => {
-        const navPath = path === '' ? '/home' : path;
+        const navPath = path === '' ? '/' : path;
         const navigateMessage = <div>navigating to <span className="highlight-text">{navPath}</span>...</div>
         const newText = [previousCommandText(), navigateMessage];
         setDisplayText(displayText.concat(newText));

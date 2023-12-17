@@ -13,7 +13,7 @@ const Home = () => {
                     <SportsSoccerIcon fontSize='large' />
                 </GenericButton>
             </Link>
-            <Link to={`/`}>
+            <Link to={`/terminal`}>
                 <GenericButton label='Terminal'>
                     <TerminalIcon fontSize='large' />
                 </GenericButton>

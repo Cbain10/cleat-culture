@@ -13,9 +13,11 @@ const CleatTable = () => {
 
     useEffect(() => {
         dynamoCleatService.getAllCleats()
-            .then(response => setCleats(response))
+            .then(response => {
+                setCleats(response)
+                setLoading(false);
+            })
             .catch(err => console.error(err));
-        setLoading(false);
     }, []);
 
     const capitalizeFirstLetter = (word: string) => {

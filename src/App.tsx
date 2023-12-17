@@ -14,8 +14,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/' element={<TerminalView />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/terminal' element={<TerminalView />} />
           <Route path='/soccer' element={<SoccerView />} />
           <Route path='/soccer/archive' element={<CleatTable />} />
           <Route path='/soccer/archive/:id' element={<CleatPage />} />
