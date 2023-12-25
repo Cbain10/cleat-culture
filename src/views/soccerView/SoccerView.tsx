@@ -3,7 +3,6 @@ import { GenericButton } from "../../components/buttons/generic-button/GenericBu
 import TableChartIcon from '@mui/icons-material/TableChart';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { Nav } from "../../components/nav/Nav";
-import { CleatProvider } from "../../contexts/CleatContext";
 
 export const SoccerView = () => {
     return (

@@ -138,13 +138,13 @@ const Recommender = () => {
                     <div>Sorry, no results</div>
                 }
                 {cleats?.length && 
-                    cleats?.map((boot) => {
+                    cleats?.map((cleat: Cleat) => {
                         return (
-                            <Link onClick={() => console.log('setting local storage....')} className='cleat-item' key={boot.cleatName} to={`/soccer/recommender/${boot.cleatName}`}>
-                                {boot.imageUrl &&
-                                    <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
+                            <Link onClick={() => console.log('setting local storage....')} className='cleat-item' key={cleat.cleatName} to={`/soccer/recommender/${cleat.cleatName}`}>
+                                {cleat.imageUrl &&
+                                    <img className='cleat-image' src={cleat.imageUrl} width={100} alt="idk" />
                                 }
-                                <h3 className="cleat-label">{boot.brand} {boot.cleatName}</h3>
+                                <h3 className="cleat-label">{cleat.brand} {cleat.cleatName}</h3>
                             </Link>
                         )
                     })}

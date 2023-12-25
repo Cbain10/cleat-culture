@@ -8,6 +8,7 @@ import { SoccerView } from './views/soccerView/SoccerView';
 import { GamesView } from './views/gamesView/GamesView';
 import { Hangman } from './views/gamesView/hangman/Hangman';
 import { TerminalView } from './views/terminalView/TerminalView';
+import { CleatProvider } from './contexts/CleatContext';
 
 function App() {
   return (
