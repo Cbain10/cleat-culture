@@ -154,7 +154,7 @@ const Recommender = () => {
 
     return (
         <>
-            <Nav />
+            <Nav onClick={() => setCleats(undefined)}/>
             <div className="recommender-container">
                 {(!cleats && !loading) &&
                     SelectionsSection()
