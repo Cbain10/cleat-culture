@@ -2,13 +2,13 @@ import { ReactNode, createContext, useContext, useState } from "react";
 import { Cleat } from "../types/types";
 
 type TCleatContext = {
-    cleats: Cleat[];
-    setCleatArray: (cleats: Cleat[]) => void;
+    cleats: Cleat[] | undefined;
+    setCleats: (cleats: Cleat[] | undefined) => void;
 }
 
 export const CleatContext = createContext<TCleatContext>({
     cleats: [],
-    setCleatArray: () => {}
+    setCleats: () => {}
 });
 
 type CleatProviderProps = {
@@ -16,11 +16,8 @@ type CleatProviderProps = {
 }
 
 export const CleatProvider: React.FC<CleatProviderProps> = ({ children }) => {
-    const [cleats, setCleats] = useState<Cleat[]>([]);
-    const setCleatArray = (cleats: Cleat[]) => {
-        setCleats(cleats);
-    }
-    return <CleatContext.Provider value={{ cleats, setCleatArray }}>{children}</CleatContext.Provider>;
+    const [cleats, setCleats] = useState<Cleat[] | undefined>();
+    return <CleatContext.Provider value={{ cleats, setCleats }}>{children}</CleatContext.Provider>;
 };
 
 export const useCleats = () => useContext(CleatContext);

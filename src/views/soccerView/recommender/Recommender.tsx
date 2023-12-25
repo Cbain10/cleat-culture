@@ -10,7 +10,7 @@ import { useCleats } from "../../../contexts/CleatContext";
 
 const Recommender = () => {
 
-    const { cleats, setCleatArray } = useCleats();
+    const { cleats, setCleats } = useCleats();
 
     const [width, setWidth] = useState<number>(3);
     const [comfort, setComfort] = useState<number>(3);
@@ -33,7 +33,7 @@ const Recommender = () => {
         setLoading(true);
         dynamoCleatService.getCleatsByValue(width*2, comfort*2, lockdown*2, upper)
             .then((response) => {
-                setCleatArray(response);
+                setCleats(response);
                 setLoading(false);
             });
     }
@@ -43,7 +43,7 @@ const Recommender = () => {
         setWidth(3);
         setLockdown(3);
         setUpper('any');
-        setCleatArray([]);
+        setCleats(undefined);
     }
 
     const marks = [
