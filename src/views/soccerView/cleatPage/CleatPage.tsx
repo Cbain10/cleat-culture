@@ -5,8 +5,12 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { dynamoCleatService } from '../../../services/serverless/DynamoCleatService';
 import { Cleat } from '../../../types/types';
 import { Nav } from '../../../components/nav/Nav';
+import { useCleats } from '../../../contexts/CleatContext';
 
 const CleatPage = () => {
+
+    const { cleats } = useCleats();
+    console.log('context', cleats);
 
     const location = useLocation();
     const pathname = location.pathname;

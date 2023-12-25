@@ -6,14 +6,16 @@ import { Slider } from "@mui/material";
 import { dynamoCleatService } from "../../../services/serverless/DynamoCleatService";
 import { Cleat } from "../../../types/types";
 import { Nav } from "../../../components/nav/Nav";
+import { useCleats } from "../../../contexts/CleatContext";
 
 const Recommender = () => {
+
+    const { cleats, setCleatArray } = useCleats();
 
     const [width, setWidth] = useState<number>(3);
     const [comfort, setComfort] = useState<number>(3);
     const [lockdown, setLockdown] = useState<number>(3);
     const [upper, setUpper] = useState<string>('any');
-    const [results, setResults] = useState<Cleat[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const uppers = [
@@ -31,7 +33,7 @@ const Recommender = () => {
         setLoading(true);
         dynamoCleatService.getCleatsByValue(width*2, comfort*2, lockdown*2, upper)
             .then((response) => {
-                setResults(response);
+                setCleatArray(response);
                 setLoading(false);
             });
     }
@@ -41,7 +43,7 @@ const Recommender = () => {
         setWidth(3);
         setLockdown(3);
         setUpper('any');
-        setResults(undefined);
+        setCleatArray([]);
     }
 
     const marks = [
@@ -132,13 +134,13 @@ const Recommender = () => {
                     onClick={resetValuesHandler}    
                 >Reset</button>
                 <br />
-                {results?.length === 0 && 
+                {cleats?.length === 0 && 
                     <div>Sorry, no results</div>
                 }
-                {results?.length && 
-                    results?.map((boot) => {
+                {cleats?.length && 
+                    cleats?.map((boot) => {
                         return (
-                            <Link className='cleat-item' key={boot.cleatName} to={`/soccer/recommender/${boot.cleatName}`}>
+                            <Link onClick={() => console.log('setting local storage....')} className='cleat-item' key={boot.cleatName} to={`/soccer/recommender/${boot.cleatName}`}>
                                 {boot.imageUrl &&
                                     <img className='cleat-image' src={boot.imageUrl} width={100} alt="idk" />
                                 }
@@ -154,13 +156,13 @@ const Recommender = () => {
         <>
             <Nav />
             <div className="recommender-container">
-                {(!results && !loading) &&
+                {(!cleats && !loading) &&
                     SelectionsSection()
                 }
                 {loading &&
                     LoadingSpinner()
                 }
-                {results &&
+                {cleats &&
                     ResultsSection()
                 }
             </div>
