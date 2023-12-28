@@ -9,6 +9,8 @@ import { useCleats } from '../../../contexts/CleatContext';
 
 const CleatPage = () => {
 
+    const { setCleats } = useCleats();
+
     const { cleats } = useCleats();
     console.log('context', cleats);
 
@@ -36,7 +38,7 @@ const CleatPage = () => {
 
     return (
         <div className="cleat-page-container">
-            <Nav />
+            <Nav onClick={() => setCleats(undefined)}/>
             {loading &&
                 <ClipLoader
                     color={'#5fe4fe'}

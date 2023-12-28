@@ -43,30 +43,29 @@ const Recommender = () => {
         setWidth(3);
         setLockdown(3);
         setUpper('any');
-        setCleats(undefined);
     }
 
-    const marks = [
-        { value: 1, label: '1' },
-        { value: 2, label: '2' },
-        { value: 3, label: '3' },
-        { value: 4, label: '4' },
-        { value: 5, label: '5' }
-    ]
+    const clearCleats = () => {
+        setCleats(undefined);
+    }
 
     const SelectionsSection = () => {
         return (
             <div className='selections-container'>
                 <div className="selection-category">
+                <button
+                    className="reset-btn"
+                    onClick={resetValuesHandler}    
+                >Reset Values</button>
                     <h3 className="category">Width</h3>
                     <Slider
+                        valueLabelDisplay="auto"
                         value={width}
                         onChange={(e, val) => {
                             console.log(e);
                             setWidth(Array.isArray(val) ? val[0] : val)
                         }}
                         step={1}
-                        marks={marks}
                         min={1}
                         max={5}
                     />
@@ -74,13 +73,13 @@ const Recommender = () => {
                 <div className="selection-category">
                     <h3 className="category">Comfort</h3>
                     <Slider
+                        valueLabelDisplay="auto"
                         value={comfort}
                         onChange={(e, val) => {
                             console.log(e);
                             setComfort(Array.isArray(val) ? val[0] : val)
                         }}
                         step={1}
-                        marks={marks}
                         min={1}
                         max={5}
                     />
@@ -88,13 +87,13 @@ const Recommender = () => {
                 <div className="selection-category">
                     <h3 className="category">Lockdown</h3>
                     <Slider
+                        valueLabelDisplay="auto"
                         value={lockdown}
                         onChange={(e, val) => {
                             console.log(e);
                             setLockdown(Array.isArray(val) ? val[0] : val)
                         }}
                         step={1}
-                        marks={marks}
                         min={1}
                         max={5}
                     />
@@ -130,9 +129,9 @@ const Recommender = () => {
             <div className='results-section'>   
                 <h1>Results:</h1>
                 <button
-                    className="reset-btn"
-                    onClick={resetValuesHandler}    
-                >Reset</button>
+                    className="clear-btn"
+                    onClick={clearCleats}
+                >Back to Selections</button>
                 <br />
                 {cleats?.length === 0 && 
                     <div>Sorry, no results</div>
